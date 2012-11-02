@@ -1,0 +1,13 @@
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\KillerBeesGaming Client.exe.config
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\KillerBeesGaming Client.exe
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\KillerBeesGaming Client.pdb
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\KillerBeesGaming Client.xml
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming_Client.FrmClientScreen.resources
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming_Client.FrmOption.resources
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming_Client.Resources.resources
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming Client.exe
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming Client.xml
+C:\Users\Jonathan\Desktop\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming Client.pdb
