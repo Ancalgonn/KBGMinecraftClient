@@ -15,26 +15,23 @@ Features Done
 -Check Minecraft login server status
 -Check to see if IR is online
 -Added Options Menu
+-Auto error report
+-Auto login
+-Remember user credentials
+-Upload source code to secure location
 
 Things that need done
 
--Auto Updater
--Auto install mods
+-Twitter Module
+-Auto Updater/Installer
 -Auto Repair
--Auto error report (silently, full stacktrace)
 -Update links to forum news on startup
--Upload source code to secure location
--Remember user credentials
--Custom RAM alotment
-- Check for new Minecraft version and update Minecraft
-- Tooltips
-- Configurable news tab
-- Export mod list
-- Auto login
+-Custom RAM alotment?
+-Tooltips
+-Configurable news tab
+-Export mod list
 - Security
 - Languages
 - Multiple accounts
 - Portable, relative paths
-- Minecraft font
-- Backups
-- Support for patchers
+-Backups
