@@ -1,6 +1,9 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
 Imports System.Net.Mail
+Imports System.Xml
+Imports Twitterizer
+
 Public Class FrmClientScreen
 
 #Region "Loadup Actions"
@@ -23,7 +26,7 @@ Public Class FrmClientScreen
                 txtUsername.Focus()
             End If
 
-          
+
 
             If CheckServerStatus("google.com", 80) = False Then
                 MessageBox.Show("You are not connected to the internet. Please connect and restart application.")
@@ -79,7 +82,7 @@ Public Class FrmClientScreen
 
 #Region "Buttons"
     Private Sub btnLogin_Click(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
-    
+
         Try
 
             If ChkboxRememberMe.Checked = True Then
@@ -147,6 +150,16 @@ Public Class FrmClientScreen
 
 
     Private Sub lblMinecraftServer_Click(sender As System.Object, e As System.EventArgs) Handles lblMinecraftServer.Click
-        MsgBox(My.Settings.LastServer & vbNewLine & My.Settings.AutoLogin)
+        ' String to Search
+
+        ' Get the search result
+        Dim update As New TwitterStatus
+
+        update.Create()
+
+    End Sub
+
+    Private Sub lblIR_Click(sender As System.Object, e As System.EventArgs) Handles lblIR.Click
+
     End Sub
 End Class
