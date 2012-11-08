@@ -93,9 +93,9 @@ Partial Class FrmClientScreen
         Me.GroupBox2.Controls.Add(Me.txtPassword)
         Me.GroupBox2.Controls.Add(Me.BtnOptions)
         Me.GroupBox2.Controls.Add(Me.btnLogin)
-        Me.GroupBox2.Location = New System.Drawing.Point(347, 335)
+        Me.GroupBox2.Location = New System.Drawing.Point(336, 335)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(274, 93)
+        Me.GroupBox2.Size = New System.Drawing.Size(285, 93)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Login"
@@ -257,11 +257,11 @@ Partial Class FrmClientScreen
         'lblEventServer
         '
         Me.lblEventServer.AutoSize = True
-        Me.lblEventServer.Location = New System.Drawing.Point(60, 115)
+        Me.lblEventServer.Location = New System.Drawing.Point(67, 115)
         Me.lblEventServer.Name = "lblEventServer"
-        Me.lblEventServer.Size = New System.Drawing.Size(72, 13)
+        Me.lblEventServer.Size = New System.Drawing.Size(65, 13)
         Me.lblEventServer.TabIndex = 4
-        Me.lblEventServer.Text = "Event Server:"
+        Me.lblEventServer.Text = "Test Server:"
         '
         'lblTFCR
         '

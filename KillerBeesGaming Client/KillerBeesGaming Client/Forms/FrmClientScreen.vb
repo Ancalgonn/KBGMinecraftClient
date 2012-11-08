@@ -56,7 +56,7 @@ Public Class FrmClientScreen
 
 #Region "Functions"
     Private Function PingAllServers()
-        If ServerPing("Minecraft.Login.Net", 80) = True Then
+        If ServerPing("Login.minecraft.net", 80) = True Then
             Label7.Text = "Online"
             Label7.ForeColor = Color.Green
         Else
@@ -64,7 +64,7 @@ Public Class FrmClientScreen
             Label7.ForeColor = Color.Red
         End If
 
-        If ServerPing("Minecraft.Login.Net", 80) = True Then
+        If ServerPing("Minecraft.Net", 80) = True Then
             Label6.Text = "Online"
             Label6.ForeColor = Color.Green
         Else
@@ -96,7 +96,7 @@ Public Class FrmClientScreen
             Label3.ForeColor = Color.Red
         End If
 
-        If ServerPing("108.166.189.186:25651", 25651) = True Then 'terraferma
+        If ServerPing("198.154.108.218", 25586) = True Then 'terraferma
             Label4.Text = "Online"
             Label4.ForeColor = Color.Green
         Else
@@ -104,7 +104,7 @@ Public Class FrmClientScreen
             Label4.ForeColor = Color.Red
         End If
 
-        If ServerPing("198.154.108.218:25566", 25565) = True Then 'Event Server
+        If ServerPing("198.154.108.218", 25566) = True Then 'test Server
             Label5.Text = "Online"
             Label5.ForeColor = Color.Green
         Else
