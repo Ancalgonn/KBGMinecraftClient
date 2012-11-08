@@ -23,226 +23,354 @@ Partial Class FrmClientScreen
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmClientScreen))
-        Me.btnLogin = New System.Windows.Forms.Button()
-        Me.btnOptions = New System.Windows.Forms.Button()
+        Me.PbrTotal = New System.Windows.Forms.ProgressBar()
+        Me.PbrProgress = New System.Windows.Forms.ProgressBar()
+        Me.lblTotalProgress = New System.Windows.Forms.Label()
+        Me.lblProgress = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CboUser = New System.Windows.Forms.ComboBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
-        Me.lblUsername = New System.Windows.Forms.Label()
-        Me.lblPassword = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.BtnOptions = New System.Windows.Forms.Button()
+        Me.btnLogin = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblMinecraftLoginServers = New System.Windows.Forms.Label()
+        Me.lblMinecraftdotnet = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblEventServer = New System.Windows.Forms.Label()
+        Me.lblTFCR = New System.Windows.Forms.Label()
+        Me.lblER = New System.Windows.Forms.Label()
+        Me.lblMining = New System.Windows.Forms.Label()
         Me.lblIR = New System.Windows.Forms.Label()
-        Me.lblMinecraftServer = New System.Windows.Forms.Label()
-        Me.ChkboxRememberMe = New System.Windows.Forms.CheckBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.Panel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.chkRememberMe = New System.Windows.Forms.CheckBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnLogin
+        'PbrTotal
         '
-        Me.btnLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLogin.Enabled = False
-        Me.btnLogin.Location = New System.Drawing.Point(786, 44)
-        Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(75, 23)
-        Me.btnLogin.TabIndex = 3
-        Me.btnLogin.Text = "&Login"
-        Me.btnLogin.UseVisualStyleBackColor = True
+        Me.PbrTotal.Location = New System.Drawing.Point(12, 383)
+        Me.PbrTotal.Name = "PbrTotal"
+        Me.PbrTotal.Size = New System.Drawing.Size(291, 23)
+        Me.PbrTotal.TabIndex = 12
         '
-        'btnOptions
+        'PbrProgress
         '
-        Me.btnOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOptions.Location = New System.Drawing.Point(786, 16)
-        Me.btnOptions.Name = "btnOptions"
-        Me.btnOptions.Size = New System.Drawing.Size(75, 23)
-        Me.btnOptions.TabIndex = 4
-        Me.btnOptions.Text = "&Options"
-        Me.btnOptions.UseVisualStyleBackColor = True
+        Me.PbrProgress.Location = New System.Drawing.Point(12, 354)
+        Me.PbrProgress.Name = "PbrProgress"
+        Me.PbrProgress.Size = New System.Drawing.Size(291, 23)
+        Me.PbrProgress.TabIndex = 11
+        '
+        'lblTotalProgress
+        '
+        Me.lblTotalProgress.AutoSize = True
+        Me.lblTotalProgress.Location = New System.Drawing.Point(309, 383)
+        Me.lblTotalProgress.Name = "lblTotalProgress"
+        Me.lblTotalProgress.Size = New System.Drawing.Size(21, 13)
+        Me.lblTotalProgress.TabIndex = 14
+        Me.lblTotalProgress.Text = "0%"
+        '
+        'lblProgress
+        '
+        Me.lblProgress.AutoSize = True
+        Me.lblProgress.Location = New System.Drawing.Point(309, 354)
+        Me.lblProgress.Name = "lblProgress"
+        Me.lblProgress.Size = New System.Drawing.Size(13, 13)
+        Me.lblProgress.TabIndex = 15
+        Me.lblProgress.Text = "0"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.chkRememberMe)
+        Me.GroupBox2.Controls.Add(Me.CboUser)
+        Me.GroupBox2.Controls.Add(Me.txtPassword)
+        Me.GroupBox2.Controls.Add(Me.BtnOptions)
+        Me.GroupBox2.Controls.Add(Me.btnLogin)
+        Me.GroupBox2.Location = New System.Drawing.Point(347, 335)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(274, 93)
+        Me.GroupBox2.TabIndex = 14
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Login"
+        '
+        'CboUser
+        '
+        Me.CboUser.FormattingEnabled = True
+        Me.CboUser.Location = New System.Drawing.Point(6, 19)
+        Me.CboUser.Name = "CboUser"
+        Me.CboUser.Size = New System.Drawing.Size(181, 21)
+        Me.CboUser.TabIndex = 18
         '
         'txtPassword
         '
-        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(609, 44)
+        Me.txtPassword.Location = New System.Drawing.Point(6, 48)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(171, 22)
-        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.Size = New System.Drawing.Size(181, 20)
+        Me.txtPassword.TabIndex = 3
         Me.txtPassword.UseSystemPasswordChar = True
         '
-        'txtUsername
+        'BtnOptions
         '
-        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUsername.Location = New System.Drawing.Point(609, 15)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(171, 22)
-        Me.txtUsername.TabIndex = 1
+        Me.BtnOptions.Location = New System.Drawing.Point(193, 19)
+        Me.BtnOptions.Name = "BtnOptions"
+        Me.BtnOptions.Size = New System.Drawing.Size(75, 23)
+        Me.BtnOptions.TabIndex = 1
+        Me.BtnOptions.Text = "Option"
+        Me.BtnOptions.UseVisualStyleBackColor = True
         '
-        'lblUsername
+        'btnLogin
         '
-        Me.lblUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblUsername.AutoSize = True
-        Me.lblUsername.BackColor = System.Drawing.Color.Transparent
-        Me.lblUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsername.ForeColor = System.Drawing.Color.White
-        Me.lblUsername.Location = New System.Drawing.Point(536, 16)
-        Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(67, 19)
-        Me.lblUsername.TabIndex = 5
-        Me.lblUsername.Text = "Username:"
-        Me.lblUsername.UseCompatibleTextRendering = True
+        Me.btnLogin.Location = New System.Drawing.Point(193, 48)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(75, 23)
+        Me.btnLogin.TabIndex = 0
+        Me.btnLogin.Text = "Login"
+        Me.btnLogin.UseVisualStyleBackColor = True
         '
-        'lblPassword
+        'GroupBox1
         '
-        Me.lblPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblPassword.AutoSize = True
-        Me.lblPassword.BackColor = System.Drawing.Color.Transparent
-        Me.lblPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPassword.ForeColor = System.Drawing.Color.White
-        Me.lblPassword.Location = New System.Drawing.Point(539, 44)
-        Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(64, 19)
-        Me.lblPassword.TabIndex = 6
-        Me.lblPassword.Text = "Password:"
-        Me.lblPassword.UseCompatibleTextRendering = True
+        Me.GroupBox1.Location = New System.Drawing.Point(312, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(309, 181)
+        Me.GroupBox1.TabIndex = 16
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Twitter"
         '
-        'Panel1
+        'GroupBox3
         '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.Panel1.BackgroundImage = Global.KillerBeesGaming_Client.My.Resources.Resources.lower_texture
-        Me.Panel1.Controls.Add(Me.ProgressBar2)
-        Me.Panel1.Controls.Add(Me.ProgressBar1)
-        Me.Panel1.Controls.Add(Me.lblIR)
-        Me.Panel1.Controls.Add(Me.lblMinecraftServer)
-        Me.Panel1.Controls.Add(Me.ChkboxRememberMe)
-        Me.Panel1.Controls.Add(Me.lblUsername)
-        Me.Panel1.Controls.Add(Me.lblPassword)
-        Me.Panel1.Controls.Add(Me.btnLogin)
-        Me.Panel1.Controls.Add(Me.btnOptions)
-        Me.Panel1.Controls.Add(Me.txtUsername)
-        Me.Panel1.Controls.Add(Me.txtPassword)
-        Me.Panel1.Location = New System.Drawing.Point(0, 341)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(874, 93)
-        Me.Panel1.TabIndex = 7
+        Me.GroupBox3.Controls.Add(Me.Label7)
+        Me.GroupBox3.Controls.Add(Me.Label6)
+        Me.GroupBox3.Controls.Add(Me.lblMinecraftLoginServers)
+        Me.GroupBox3.Controls.Add(Me.lblMinecraftdotnet)
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Controls.Add(Me.Label3)
+        Me.GroupBox3.Controls.Add(Me.Label2)
+        Me.GroupBox3.Controls.Add(Me.Label1)
+        Me.GroupBox3.Controls.Add(Me.lblEventServer)
+        Me.GroupBox3.Controls.Add(Me.lblTFCR)
+        Me.GroupBox3.Controls.Add(Me.lblER)
+        Me.GroupBox3.Controls.Add(Me.lblMining)
+        Me.GroupBox3.Controls.Add(Me.lblIR)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(291, 181)
+        Me.GroupBox3.TabIndex = 17
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Server Statuses"
         '
-        'ProgressBar2
+        'Label7
         '
-        Me.ProgressBar2.Location = New System.Drawing.Point(178, 47)
-        Me.ProgressBar2.Name = "ProgressBar2"
-        Me.ProgressBar2.Size = New System.Drawing.Size(299, 23)
-        Me.ProgressBar2.TabIndex = 12
-        Me.ProgressBar2.Visible = False
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.Color.Red
+        Me.Label7.Location = New System.Drawing.Point(135, 160)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(37, 13)
+        Me.Label7.TabIndex = 13
+        Me.Label7.Text = "Offline"
         '
-        'ProgressBar1
+        'Label6
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(178, 17)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(299, 23)
-        Me.ProgressBar1.TabIndex = 11
-        Me.ProgressBar1.Visible = False
+        Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.Color.Red
+        Me.Label6.Location = New System.Drawing.Point(135, 137)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(37, 13)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Offline"
+        '
+        'lblMinecraftLoginServers
+        '
+        Me.lblMinecraftLoginServers.AutoSize = True
+        Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(11, 160)
+        Me.lblMinecraftLoginServers.Name = "lblMinecraftLoginServers"
+        Me.lblMinecraftLoginServers.Size = New System.Drawing.Size(122, 13)
+        Me.lblMinecraftLoginServers.TabIndex = 11
+        Me.lblMinecraftLoginServers.Text = "Minecraft Login Servers:"
+        '
+        'lblMinecraftdotnet
+        '
+        Me.lblMinecraftdotnet.AutoSize = True
+        Me.lblMinecraftdotnet.Location = New System.Drawing.Point(61, 137)
+        Me.lblMinecraftdotnet.Name = "lblMinecraftdotnet"
+        Me.lblMinecraftdotnet.Size = New System.Drawing.Size(72, 13)
+        Me.lblMinecraftdotnet.TabIndex = 10
+        Me.lblMinecraftdotnet.Text = "Minecraft.net:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.Red
+        Me.Label5.Location = New System.Drawing.Point(135, 115)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.TabIndex = 9
+        Me.Label5.Text = "Offline"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.Color.Red
+        Me.Label4.Location = New System.Drawing.Point(135, 93)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(37, 13)
+        Me.Label4.TabIndex = 8
+        Me.Label4.Text = "Offline"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.Color.Red
+        Me.Label3.Location = New System.Drawing.Point(135, 71)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(37, 13)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Offline"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.Color.Red
+        Me.Label2.Location = New System.Drawing.Point(135, 49)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(37, 13)
+        Me.Label2.TabIndex = 6
+        Me.Label2.Text = "Offline"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(135, 26)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Offline"
+        '
+        'lblEventServer
+        '
+        Me.lblEventServer.AutoSize = True
+        Me.lblEventServer.Location = New System.Drawing.Point(60, 115)
+        Me.lblEventServer.Name = "lblEventServer"
+        Me.lblEventServer.Size = New System.Drawing.Size(72, 13)
+        Me.lblEventServer.TabIndex = 4
+        Me.lblEventServer.Text = "Event Server:"
+        '
+        'lblTFCR
+        '
+        Me.lblTFCR.AutoSize = True
+        Me.lblTFCR.Location = New System.Drawing.Point(39, 93)
+        Me.lblTFCR.Name = "lblTFCR"
+        Me.lblTFCR.Size = New System.Drawing.Size(93, 13)
+        Me.lblTFCR.TabIndex = 3
+        Me.lblTFCR.Text = "TerraFerma Rage:"
+        '
+        'lblER
+        '
+        Me.lblER.AutoSize = True
+        Me.lblER.Location = New System.Drawing.Point(57, 71)
+        Me.lblER.Name = "lblER"
+        Me.lblER.Size = New System.Drawing.Size(76, 13)
+        Me.lblER.TabIndex = 2
+        Me.lblER.Text = "Endless Rage:"
+        '
+        'lblMining
+        '
+        Me.lblMining.AutoSize = True
+        Me.lblMining.Location = New System.Drawing.Point(61, 49)
+        Me.lblMining.Name = "lblMining"
+        Me.lblMining.Size = New System.Drawing.Size(72, 13)
+        Me.lblMining.TabIndex = 1
+        Me.lblMining.Text = "Mining World:"
         '
         'lblIR
         '
         Me.lblIR.AutoSize = True
-        Me.lblIR.BackColor = System.Drawing.Color.Transparent
-        Me.lblIR.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblIR.ForeColor = System.Drawing.Color.Red
-        Me.lblIR.Location = New System.Drawing.Point(12, 47)
+        Me.lblIR.Location = New System.Drawing.Point(52, 26)
         Me.lblIR.Name = "lblIR"
-        Me.lblIR.Size = New System.Drawing.Size(28, 20)
-        Me.lblIR.TabIndex = 10
-        Me.lblIR.Text = "IR"
+        Me.lblIR.Size = New System.Drawing.Size(81, 13)
+        Me.lblIR.TabIndex = 0
+        Me.lblIR.Text = "Industrial Rage:"
         '
-        'lblMinecraftServer
+        'chkRememberMe
         '
-        Me.lblMinecraftServer.AutoSize = True
-        Me.lblMinecraftServer.BackColor = System.Drawing.Color.Transparent
-        Me.lblMinecraftServer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMinecraftServer.ForeColor = System.Drawing.Color.Red
-        Me.lblMinecraftServer.Location = New System.Drawing.Point(12, 17)
-        Me.lblMinecraftServer.Name = "lblMinecraftServer"
-        Me.lblMinecraftServer.Size = New System.Drawing.Size(133, 20)
-        Me.lblMinecraftServer.TabIndex = 9
-        Me.lblMinecraftServer.Text = "Minecraft Login"
+        Me.chkRememberMe.AutoSize = True
+        Me.chkRememberMe.Location = New System.Drawing.Point(6, 74)
+        Me.chkRememberMe.Name = "chkRememberMe"
+        Me.chkRememberMe.Size = New System.Drawing.Size(92, 17)
+        Me.chkRememberMe.TabIndex = 18
+        Me.chkRememberMe.Text = "RememberMe"
+        Me.chkRememberMe.UseVisualStyleBackColor = True
         '
-        'ChkboxRememberMe
+        'GroupBox4
         '
-        Me.ChkboxRememberMe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ChkboxRememberMe.AutoSize = True
-        Me.ChkboxRememberMe.BackColor = System.Drawing.Color.Transparent
-        Me.ChkboxRememberMe.ForeColor = System.Drawing.Color.White
-        Me.ChkboxRememberMe.Location = New System.Drawing.Point(609, 70)
-        Me.ChkboxRememberMe.Name = "ChkboxRememberMe"
-        Me.ChkboxRememberMe.Size = New System.Drawing.Size(101, 17)
-        Me.ChkboxRememberMe.TabIndex = 8
-        Me.ChkboxRememberMe.Text = "Remember Me?"
-        Me.ChkboxRememberMe.UseVisualStyleBackColor = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Image = Global.KillerBeesGaming_Client.My.Resources.Resources.Background
-        Me.PictureBox1.Location = New System.Drawing.Point(0, -1)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(874, 344)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 8
-        Me.PictureBox1.TabStop = False
-        '
-        'ListBox1
-        '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(558, 111)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 95)
-        Me.ListBox1.TabIndex = 9
+        Me.GroupBox4.Location = New System.Drawing.Point(313, 193)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(308, 136)
+        Me.GroupBox4.TabIndex = 18
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Forum Posts"
         '
         'FrmClientScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(873, 433)
-        Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Panel1)
+        Me.ClientSize = New System.Drawing.Size(633, 440)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.lblProgress)
+        Me.Controls.Add(Me.PbrProgress)
+        Me.Controls.Add(Me.lblTotalProgress)
+        Me.Controls.Add(Me.PbrTotal)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmClientScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "KBG Client v1.1 Beta"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+    Friend WithEvents PbrTotal As System.Windows.Forms.ProgressBar
+    Friend WithEvents PbrProgress As System.Windows.Forms.ProgressBar
+    Friend WithEvents lblTotalProgress As System.Windows.Forms.Label
+    Friend WithEvents lblProgress As System.Windows.Forms.Label
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnLogin As System.Windows.Forms.Button
-    Friend WithEvents btnOptions As System.Windows.Forms.Button
+    Friend WithEvents BtnOptions As System.Windows.Forms.Button
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
-    Friend WithEvents txtUsername As System.Windows.Forms.TextBox
-    Friend WithEvents lblUsername As System.Windows.Forms.Label
-    Friend WithEvents lblPassword As System.Windows.Forms.Label
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents ChkboxRememberMe As System.Windows.Forms.CheckBox
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents lblMinecraftServer As System.Windows.Forms.Label
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents lblIR As System.Windows.Forms.Label
-    Friend WithEvents ProgressBar2 As System.Windows.Forms.ProgressBar
-    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents lblMining As System.Windows.Forms.Label
+    Friend WithEvents lblER As System.Windows.Forms.Label
+    Friend WithEvents lblTFCR As System.Windows.Forms.Label
+    Friend WithEvents lblEventServer As System.Windows.Forms.Label
+    Friend WithEvents CboUser As System.Windows.Forms.ComboBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents lblMinecraftdotnet As System.Windows.Forms.Label
+    Friend WithEvents lblMinecraftLoginServers As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents chkRememberMe As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
 
 End Class

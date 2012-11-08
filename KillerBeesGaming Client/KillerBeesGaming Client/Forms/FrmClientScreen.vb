@@ -2,7 +2,6 @@
 Imports System.Net.Sockets
 Imports System.Net.Mail
 Imports System.Xml
-Imports Twitterizer
 
 Public Class FrmClientScreen
 
@@ -12,68 +11,10 @@ Public Class FrmClientScreen
     Private Sub FrmClientScreen_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         Try
-
-            If My.Settings.RememberUserPass = True Then
-
-                ChkboxRememberMe.Checked = True
-                txtUsername.Text = My.Settings.Username
-                txtPassword.Text = My.Settings.Password
-                btnLogin.Focus()
-            Else
-                ChkboxRememberMe.Checked = False
-                txtUsername.Text = My.Settings.Username
-                txtPassword.Text = My.Settings.Password
-                txtUsername.Focus()
-            End If
-
-
-
-            If CheckServerStatus("google.com", 80) = False Then
-                MessageBox.Show("You are not connected to the internet. Please connect and restart application.")
-
-            Else
-
-            End If
-            If CheckServerStatus("Login.minecraft.net", 80) = True Then
-
-                btnLogin.Enabled = True
-                lblMinecraftServer.ForeColor = Color.Green
-                lblMinecraftServer.Text = "Minecraft login servers are up!"
-            Else
-                lblMinecraftServer.ForeColor = Color.Red
-                lblMinecraftServer.Text = "Minecraft login servers are down!"
-
-                btnLogin.Enabled = False
-            End If
-
-
-            If CheckServerStatus("ir.industrial-craft.net", 25565) = True Then
-                lblIR.Visible = True
-                lblIR.Text = "Industrial-Rage is up!"
-                lblIR.ForeColor = Color.Green
-            Else
-
-                lblIR.Text = "Industrial-Rage is down!"
-                lblIR.ForeColor = Color.Red
-            End If
-
-
+            PingAllServers()
         Catch ex As Exception
-            If MessageBox.Show("An error has occured send error report? No personal information is send to the developer", "", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                Dim SmtpServer As New SmtpClient()
-                Dim mail As New MailMessage()
-                SmtpServer.EnableSsl = True
-                SmtpServer.Credentials = New  _
-      Net.NetworkCredential("supportforcodemaster@gmail.com", "codemaster1221715523")
-                SmtpServer.Port = 587
-                SmtpServer.Host = "smtp.gmail.com"
-                mail = New MailMessage()
-                mail.From = New MailAddress("supportforcodemaster@gmail.com")
-                mail.To.Add("supportforcodemaster@gmail.com")
-                mail.Subject = "Error Report"
-                mail.Body = (ex.Message)
-                SmtpServer.Send(mail)
-            End If
+            MsgBox(ex.Message)
+
 
         End Try
 
@@ -81,12 +22,12 @@ Public Class FrmClientScreen
 #End Region
 
 #Region "Buttons"
-    Private Sub btnLogin_Click(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
+    Private Sub btnLogin_Click(sender As System.Object, e As System.EventArgs)
 
         Try
 
-            If ChkboxRememberMe.Checked = True Then
-                My.Settings.Username = txtUsername.Text
+            If chkRememberMe.Checked = True Then
+                My.Settings.Username = CboUser.Text
                 My.Settings.Password = txtPassword.Text
                 My.Settings.RememberUserPass = True
             Else
@@ -96,43 +37,84 @@ Public Class FrmClientScreen
             End If
 
             If My.Settings.AutoLogin = False Then
-                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text)
+                Process.Start(Application.StartupPath & "\minecraft.exe", CboUser.Text & " " & txtPassword.Text)
             Else
-                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text & " " & My.Settings.LastServer)
+                Process.Start(Application.StartupPath & "\minecraft.exe", CboUser.Text & " " & txtPassword.Text & " " & My.Settings.LastServer)
             End If
             Application.Exit()
         Catch ex As Exception
-            If MessageBox.Show("An error has occured send error report? No personal information is send to the developer", "", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                Dim SmtpServer As New SmtpClient()
-                Dim mail As New MailMessage()
-                SmtpServer.EnableSsl = True
-                SmtpServer.Credentials = New  _
-      Net.NetworkCredential("supportforcodemaster@gmail.com", "codemaster1221715523")
-                SmtpServer.Port = 587
-                SmtpServer.Host = "smtp.gmail.com"
-                mail = New MailMessage()
-                mail.From = New MailAddress("supportforcodemaster@gmail.com")
-                mail.To.Add("supportforcodemaster@gmail.com")
-                mail.Subject = "Error Report"
-                mail.Body = (ex.Message)
-                SmtpServer.Send(mail)
-            End If
+            MsgBox(ex.Message)
         End Try
 
     End Sub
 
-    Private Sub btnOptions_Click(sender As System.Object, e As System.EventArgs) Handles btnOptions.Click
+    Private Sub btnOptions_Click(sender As System.Object, e As System.EventArgs)
         FrmOption.Show()
     End Sub
 
 #End Region
 
 #Region "Functions"
-    Public Function Te()
+    Private Function PingAllServers()
+        If ServerPing("Minecraft.Login.Net", 80) = True Then
+            Label7.Text = "Online"
+            Label7.ForeColor = Color.Green
+        Else
+            Label7.Text = "Offline"
+            Label7.ForeColor = Color.Red
+        End If
+
+        If ServerPing("Minecraft.Login.Net", 80) = True Then
+            Label6.Text = "Online"
+            Label6.ForeColor = Color.Green
+        Else
+            Label6.Text = "Offline"
+            Label6.ForeColor = Color.Red
+        End If
+
+        If ServerPing("ir.industrial-craft.net", 25565) = True Then
+            Label1.Text = "Online"
+            Label1.ForeColor = Color.Green
+        Else
+            Label1.Text = "Offline"
+            Label1.ForeColor = Color.Red
+        End If
+
+        If ServerPing("mining.industrial-craft.net", 25565) = True Then
+            Label2.Text = "Online"
+            Label2.ForeColor = Color.Green
+        Else
+            Label2.Text = "Offline"
+            Label2.ForeColor = Color.Red
+        End If
+
+        If ServerPing("209.105.230.53", 25565) = True Then 'endless rage
+            Label3.Text = "Online"
+            Label3.ForeColor = Color.Green
+        Else
+            Label3.Text = "Offline"
+            Label3.ForeColor = Color.Red
+        End If
+
+        If ServerPing("108.166.189.186:25651", 25651) = True Then 'terraferma
+            Label4.Text = "Online"
+            Label4.ForeColor = Color.Green
+        Else
+            Label4.Text = "Offline"
+            Label4.ForeColor = Color.Red
+        End If
+
+        If ServerPing("198.154.108.218:25566", 25565) = True Then 'Event Server
+            Label5.Text = "Online"
+            Label5.ForeColor = Color.Green
+        Else
+            Label5.Text = "Offline"
+            Label5.ForeColor = Color.Red
+        End If
 
     End Function
 
-    Public Function CheckServerStatus(IP As String, Port As Integer)
+    Public Function ServerPing(ByVal IP As String, ByVal Port As Integer)
         'Connects to the server via a Tcp packet on a specified port, returns true if connection secessful
         Dim Server As New TcpClient
         Try
@@ -142,24 +124,11 @@ Public Class FrmClientScreen
             Return False
         End Try
     End Function
-
-    Sub download()
-        My.Computer.Network.DownloadFile("https://s3.amazonaws.com/MinecraftDownload/launcher/Minecraft.exe", My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData & "\minecraft.exe")
-    End Sub
 #End Region
 
 
-    Private Sub lblMinecraftServer_Click(sender As System.Object, e As System.EventArgs) Handles lblMinecraftServer.Click
-        ' String to Search
-
-        ' Get the search result
-        Dim update As New TwitterStatus
-
-        update.Create()
-
-    End Sub
-
-    Private Sub lblIR_Click(sender As System.Object, e As System.EventArgs) Handles lblIR.Click
-
+   
+    Private Sub btnLogin_Click_1(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
+        MsgBox(ServerPing("IR.industrial-craft.net", 25565))
     End Sub
 End Class
