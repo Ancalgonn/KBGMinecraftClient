@@ -22,17 +22,20 @@ Partial Class FrmClientScreen
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmClientScreen))
         Me.PbrTotal = New System.Windows.Forms.ProgressBar()
         Me.PbrProgress = New System.Windows.Forms.ProgressBar()
         Me.lblTotalProgress = New System.Windows.Forms.Label()
         Me.lblProgress = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkRememberMe = New System.Windows.Forms.CheckBox()
         Me.CboUser = New System.Windows.Forms.ComboBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.BtnOptions = New System.Windows.Forms.Button()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rtxtTwitter = New System.Windows.Forms.RichTextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -48,30 +51,34 @@ Partial Class FrmClientScreen
         Me.lblER = New System.Windows.Forms.Label()
         Me.lblMining = New System.Windows.Forms.Label()
         Me.lblIR = New System.Windows.Forms.Label()
-        Me.chkRememberMe = New System.Windows.Forms.CheckBox()
+        Me.lblProgressInfo = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'PbrTotal
         '
-        Me.PbrTotal.Location = New System.Drawing.Point(12, 383)
+        Me.PbrTotal.Location = New System.Drawing.Point(6, 48)
         Me.PbrTotal.Name = "PbrTotal"
-        Me.PbrTotal.Size = New System.Drawing.Size(291, 23)
+        Me.PbrTotal.Size = New System.Drawing.Size(267, 23)
         Me.PbrTotal.TabIndex = 12
         '
         'PbrProgress
         '
-        Me.PbrProgress.Location = New System.Drawing.Point(12, 354)
+        Me.PbrProgress.Location = New System.Drawing.Point(6, 19)
         Me.PbrProgress.Name = "PbrProgress"
-        Me.PbrProgress.Size = New System.Drawing.Size(291, 23)
+        Me.PbrProgress.Size = New System.Drawing.Size(267, 23)
         Me.PbrProgress.TabIndex = 11
         '
         'lblTotalProgress
         '
         Me.lblTotalProgress.AutoSize = True
-        Me.lblTotalProgress.Location = New System.Drawing.Point(309, 383)
+        Me.lblTotalProgress.Location = New System.Drawing.Point(279, 51)
         Me.lblTotalProgress.Name = "lblTotalProgress"
         Me.lblTotalProgress.Size = New System.Drawing.Size(21, 13)
         Me.lblTotalProgress.TabIndex = 14
@@ -80,11 +87,11 @@ Partial Class FrmClientScreen
         'lblProgress
         '
         Me.lblProgress.AutoSize = True
-        Me.lblProgress.Location = New System.Drawing.Point(309, 354)
+        Me.lblProgress.Location = New System.Drawing.Point(279, 22)
         Me.lblProgress.Name = "lblProgress"
-        Me.lblProgress.Size = New System.Drawing.Size(13, 13)
+        Me.lblProgress.Size = New System.Drawing.Size(21, 13)
         Me.lblProgress.TabIndex = 15
-        Me.lblProgress.Text = "0"
+        Me.lblProgress.Text = "0%"
         '
         'GroupBox2
         '
@@ -93,24 +100,34 @@ Partial Class FrmClientScreen
         Me.GroupBox2.Controls.Add(Me.txtPassword)
         Me.GroupBox2.Controls.Add(Me.BtnOptions)
         Me.GroupBox2.Controls.Add(Me.btnLogin)
-        Me.GroupBox2.Location = New System.Drawing.Point(336, 335)
+        Me.GroupBox2.Location = New System.Drawing.Point(337, 202)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(285, 93)
+        Me.GroupBox2.Size = New System.Drawing.Size(284, 100)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Login"
         '
+        'chkRememberMe
+        '
+        Me.chkRememberMe.AutoSize = True
+        Me.chkRememberMe.Location = New System.Drawing.Point(14, 76)
+        Me.chkRememberMe.Name = "chkRememberMe"
+        Me.chkRememberMe.Size = New System.Drawing.Size(92, 17)
+        Me.chkRememberMe.TabIndex = 18
+        Me.chkRememberMe.Text = "RememberMe"
+        Me.chkRememberMe.UseVisualStyleBackColor = True
+        '
         'CboUser
         '
         Me.CboUser.FormattingEnabled = True
-        Me.CboUser.Location = New System.Drawing.Point(6, 19)
+        Me.CboUser.Location = New System.Drawing.Point(14, 21)
         Me.CboUser.Name = "CboUser"
         Me.CboUser.Size = New System.Drawing.Size(181, 21)
         Me.CboUser.TabIndex = 18
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(6, 48)
+        Me.txtPassword.Location = New System.Drawing.Point(14, 50)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(181, 20)
         Me.txtPassword.TabIndex = 3
@@ -118,7 +135,7 @@ Partial Class FrmClientScreen
         '
         'BtnOptions
         '
-        Me.BtnOptions.Location = New System.Drawing.Point(193, 19)
+        Me.BtnOptions.Location = New System.Drawing.Point(201, 21)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(75, 23)
         Me.BtnOptions.TabIndex = 1
@@ -127,7 +144,7 @@ Partial Class FrmClientScreen
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(193, 48)
+        Me.btnLogin.Location = New System.Drawing.Point(201, 50)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
         Me.btnLogin.TabIndex = 0
@@ -136,12 +153,23 @@ Partial Class FrmClientScreen
         '
         'GroupBox1
         '
-        Me.GroupBox1.Location = New System.Drawing.Point(312, 12)
+        Me.GroupBox1.Controls.Add(Me.rtxtTwitter)
+        Me.GroupBox1.Location = New System.Drawing.Point(5, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(309, 181)
+        Me.GroupBox1.Size = New System.Drawing.Size(326, 184)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Twitter"
+        '
+        'rtxtTwitter
+        '
+        Me.rtxtTwitter.BackColor = System.Drawing.Color.White
+        Me.rtxtTwitter.Location = New System.Drawing.Point(14, 19)
+        Me.rtxtTwitter.Name = "rtxtTwitter"
+        Me.rtxtTwitter.ReadOnly = True
+        Me.rtxtTwitter.Size = New System.Drawing.Size(306, 159)
+        Me.rtxtTwitter.TabIndex = 0
+        Me.rtxtTwitter.Text = ""
         '
         'GroupBox3
         '
@@ -159,9 +187,9 @@ Partial Class FrmClientScreen
         Me.GroupBox3.Controls.Add(Me.lblER)
         Me.GroupBox3.Controls.Add(Me.lblMining)
         Me.GroupBox3.Controls.Add(Me.lblIR)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox3.Location = New System.Drawing.Point(337, 12)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(291, 181)
+        Me.GroupBox3.Size = New System.Drawing.Size(284, 184)
         Me.GroupBox3.TabIndex = 17
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Server Statuses"
@@ -170,7 +198,7 @@ Partial Class FrmClientScreen
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.Color.Red
-        Me.Label7.Location = New System.Drawing.Point(135, 160)
+        Me.Label7.Location = New System.Drawing.Point(133, 156)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 13)
         Me.Label7.TabIndex = 13
@@ -180,7 +208,7 @@ Partial Class FrmClientScreen
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.Color.Red
-        Me.Label6.Location = New System.Drawing.Point(135, 137)
+        Me.Label6.Location = New System.Drawing.Point(133, 133)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 12
@@ -189,7 +217,7 @@ Partial Class FrmClientScreen
         'lblMinecraftLoginServers
         '
         Me.lblMinecraftLoginServers.AutoSize = True
-        Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(11, 160)
+        Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(9, 156)
         Me.lblMinecraftLoginServers.Name = "lblMinecraftLoginServers"
         Me.lblMinecraftLoginServers.Size = New System.Drawing.Size(122, 13)
         Me.lblMinecraftLoginServers.TabIndex = 11
@@ -198,7 +226,7 @@ Partial Class FrmClientScreen
         'lblMinecraftdotnet
         '
         Me.lblMinecraftdotnet.AutoSize = True
-        Me.lblMinecraftdotnet.Location = New System.Drawing.Point(61, 137)
+        Me.lblMinecraftdotnet.Location = New System.Drawing.Point(59, 133)
         Me.lblMinecraftdotnet.Name = "lblMinecraftdotnet"
         Me.lblMinecraftdotnet.Size = New System.Drawing.Size(72, 13)
         Me.lblMinecraftdotnet.TabIndex = 10
@@ -208,7 +236,7 @@ Partial Class FrmClientScreen
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.Color.Red
-        Me.Label5.Location = New System.Drawing.Point(135, 115)
+        Me.Label5.Location = New System.Drawing.Point(133, 111)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(37, 13)
         Me.Label5.TabIndex = 9
@@ -218,7 +246,7 @@ Partial Class FrmClientScreen
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.Color.Red
-        Me.Label4.Location = New System.Drawing.Point(135, 93)
+        Me.Label4.Location = New System.Drawing.Point(133, 89)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(37, 13)
         Me.Label4.TabIndex = 8
@@ -228,7 +256,7 @@ Partial Class FrmClientScreen
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.Color.Red
-        Me.Label3.Location = New System.Drawing.Point(135, 71)
+        Me.Label3.Location = New System.Drawing.Point(133, 67)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 7
@@ -238,7 +266,7 @@ Partial Class FrmClientScreen
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.Color.Red
-        Me.Label2.Location = New System.Drawing.Point(135, 49)
+        Me.Label2.Location = New System.Drawing.Point(133, 45)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(37, 13)
         Me.Label2.TabIndex = 6
@@ -248,7 +276,7 @@ Partial Class FrmClientScreen
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(135, 26)
+        Me.Label1.Location = New System.Drawing.Point(133, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 5
@@ -257,7 +285,7 @@ Partial Class FrmClientScreen
         'lblEventServer
         '
         Me.lblEventServer.AutoSize = True
-        Me.lblEventServer.Location = New System.Drawing.Point(67, 115)
+        Me.lblEventServer.Location = New System.Drawing.Point(65, 111)
         Me.lblEventServer.Name = "lblEventServer"
         Me.lblEventServer.Size = New System.Drawing.Size(65, 13)
         Me.lblEventServer.TabIndex = 4
@@ -266,7 +294,7 @@ Partial Class FrmClientScreen
         'lblTFCR
         '
         Me.lblTFCR.AutoSize = True
-        Me.lblTFCR.Location = New System.Drawing.Point(39, 93)
+        Me.lblTFCR.Location = New System.Drawing.Point(37, 89)
         Me.lblTFCR.Name = "lblTFCR"
         Me.lblTFCR.Size = New System.Drawing.Size(93, 13)
         Me.lblTFCR.TabIndex = 3
@@ -275,7 +303,7 @@ Partial Class FrmClientScreen
         'lblER
         '
         Me.lblER.AutoSize = True
-        Me.lblER.Location = New System.Drawing.Point(57, 71)
+        Me.lblER.Location = New System.Drawing.Point(55, 67)
         Me.lblER.Name = "lblER"
         Me.lblER.Size = New System.Drawing.Size(76, 13)
         Me.lblER.TabIndex = 2
@@ -284,7 +312,7 @@ Partial Class FrmClientScreen
         'lblMining
         '
         Me.lblMining.AutoSize = True
-        Me.lblMining.Location = New System.Drawing.Point(61, 49)
+        Me.lblMining.Location = New System.Drawing.Point(59, 45)
         Me.lblMining.Name = "lblMining"
         Me.lblMining.Size = New System.Drawing.Size(72, 13)
         Me.lblMining.TabIndex = 1
@@ -293,56 +321,71 @@ Partial Class FrmClientScreen
         'lblIR
         '
         Me.lblIR.AutoSize = True
-        Me.lblIR.Location = New System.Drawing.Point(52, 26)
+        Me.lblIR.Location = New System.Drawing.Point(50, 22)
         Me.lblIR.Name = "lblIR"
         Me.lblIR.Size = New System.Drawing.Size(81, 13)
         Me.lblIR.TabIndex = 0
         Me.lblIR.Text = "Industrial Rage:"
         '
-        'chkRememberMe
+        'lblProgressInfo
         '
-        Me.chkRememberMe.AutoSize = True
-        Me.chkRememberMe.Location = New System.Drawing.Point(6, 74)
-        Me.chkRememberMe.Name = "chkRememberMe"
-        Me.chkRememberMe.Size = New System.Drawing.Size(92, 17)
-        Me.chkRememberMe.TabIndex = 18
-        Me.chkRememberMe.Text = "RememberMe"
-        Me.chkRememberMe.UseVisualStyleBackColor = True
+        Me.lblProgressInfo.AutoSize = True
+        Me.lblProgressInfo.Location = New System.Drawing.Point(6, 83)
+        Me.lblProgressInfo.Name = "lblProgressInfo"
+        Me.lblProgressInfo.Size = New System.Drawing.Size(138, 13)
+        Me.lblProgressInfo.TabIndex = 18
+        Me.lblProgressInfo.Text = "Progress Info Goes Here....."
         '
         'GroupBox4
         '
-        Me.GroupBox4.Location = New System.Drawing.Point(313, 193)
+        Me.GroupBox4.Controls.Add(Me.PbrProgress)
+        Me.GroupBox4.Controls.Add(Me.lblProgressInfo)
+        Me.GroupBox4.Controls.Add(Me.PbrTotal)
+        Me.GroupBox4.Controls.Add(Me.lblTotalProgress)
+        Me.GroupBox4.Controls.Add(Me.lblProgress)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 202)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(308, 136)
-        Me.GroupBox4.TabIndex = 18
+        Me.GroupBox4.Size = New System.Drawing.Size(319, 100)
+        Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Forum Posts"
+        Me.GroupBox4.Text = "Progress"
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "Rock Texture.bmp")
+        Me.ImageList1.Images.SetKeyName(1, "Sand Texture.bmp")
+        Me.ImageList1.Images.SetKeyName(2, "t.bmp")
+        Me.ImageList1.Images.SetKeyName(3, "keen.jpg")
         '
         'FrmClientScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(633, 440)
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.ClientSize = New System.Drawing.Size(633, 309)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.lblProgress)
-        Me.Controls.Add(Me.PbrProgress)
-        Me.Controls.Add(Me.lblTotalProgress)
-        Me.Controls.Add(Me.PbrTotal)
-        Me.DoubleBuffered = True
+        Me.ForeColor = System.Drawing.Color.Black
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.ImeMode = System.Windows.Forms.ImeMode.[On]
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FrmClientScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "KBG Client v1.1 Beta"
+        Me.Text = "KBG Client v2.0 Beta"
+        Me.TransparencyKey = System.Drawing.SystemColors.AppWorkspace
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PbrTotal As System.Windows.Forms.ProgressBar
@@ -371,6 +414,10 @@ Partial Class FrmClientScreen
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents chkRememberMe As System.Windows.Forms.CheckBox
+    Friend WithEvents lblProgressInfo As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents rtxtTwitter As System.Windows.Forms.RichTextBox
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class
