@@ -19,10 +19,11 @@ Features Done
 -Auto login
 -Remember user credentials
 -Upload source code to secure location
+-Twitter Module
+
 
 Things that need done
 
--Twitter Module
 -Auto Updater/Installer
 -Auto Repair
 -Update links to forum news on startup

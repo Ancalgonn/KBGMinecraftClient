@@ -1,11 +1,12 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
-Imports System.Net.Mail
 Imports System.Xml
 Imports System.ComponentModel
+Imports KillerBeesGaming_Client.Update
+Imports KillerBeesGaming_Client.Bn.Classes
 Public Class FrmClientScreen
-  
-
+    Private WithEvents downloader As New FileDownloader
+    Dim LauncherFolder As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\Killerbees Gaming Client\"
 #Region "Loadup Actions"
     Private MinecraftExists As Boolean = My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\minecraft.exe")
     Dim Blank, laname, txttweet, createdat, link, fileloc, filename As String
@@ -64,7 +65,7 @@ Public Class FrmClientScreen
         End If
 
         ProgressUpdate(85.2, 85.2)
-        If ServerPing("198.154.108.218", 25586) = True Then 'terraferma
+        If ServerPing("209.105.230.51", 25565) = True Then 'terraferma
             Label4.Text = "Online"
             Label4.ForeColor = Color.Green
         Else
@@ -73,13 +74,7 @@ Public Class FrmClientScreen
         End If
 
         ProgressUpdate(100, 100)
-        If ServerPing("198.154.108.218", 25566) = True Then 'test Server
-            Label5.Text = "Online"
-            Label5.ForeColor = Color.Green
-        Else
-            Label5.Text = "Offline"
-            Label5.ForeColor = Color.Red
-        End If
+   
         lblProgressInfo.Text = "Server Pings Complete!"
     End Sub
     Private Sub ProgressUpdate(ByVal ProgressBar As Integer, ByVal Label As Integer)
@@ -100,6 +95,129 @@ Public Class FrmClientScreen
     End Function
 #End Region
 
+#Region "Download"
+    Dim UpdateLink As New Update
+    Dim whereToSave As String 'Where the program save the file
+
+    Delegate Sub ChangeTextsSafe(ByVal length As Long, ByVal position As Integer, ByVal percent As Integer, ByVal speed As Double)
+    Delegate Sub DownloadCompleteSafe(ByVal cancelled As Boolean)
+
+
+    Public Sub ChangeTexts(ByVal length As Long, ByVal position As Integer, ByVal percent As Integer, ByVal speed As Double)
+
+        Me.Label3.Text = "File Size: " & Math.Round((length / 1024), 2) & " KB"
+
+        '   Me.Label5.Text = "Downloading: " & Me.txtFileName.Text
+
+        'Me.Label4.Text = "Downloaded " & Math.Round((position / 1024), 2) & " KB of " & Math.Round((length / 1024), 2) & "KB (" & Me.ProgressBar1.Value & "%)"
+
+        If speed = -1 Then
+            Me.Label2.Text = "Speed: calculating..."
+        Else
+            Me.Label2.Text = "Speed: " & Math.Round((speed / 1024), 2) & " KB/s"
+        End If
+
+        ' Me.ProgressBar1.Value = percent
+
+
+    End Sub
+
+
+    Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+
+        'Creating the request and getting the response
+        Dim theResponse As HttpWebResponse
+        Dim theRequest As HttpWebRequest
+        Try 'Checks if the file exist
+
+            theRequest = WebRequest.Create(UpdateLink.GetDynamicLink)
+            theResponse = theRequest.GetResponse
+        Catch ex As Exception
+
+            MessageBox.Show("An error occurred while downloading file. Possibe causes:" & ControlChars.CrLf & _
+                            "1) File doesn't exist" & ControlChars.CrLf & _
+                            "2) Remote server error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            Dim cancelDelegate As New DownloadCompleteSafe(AddressOf DownloadComplete)
+
+            Me.Invoke(cancelDelegate, True)
+
+            Exit Sub
+        End Try
+        Dim length As Long = theResponse.ContentLength 'Size of the response (in bytes)
+
+        Dim safedelegate As New ChangeTextsSafe(AddressOf ChangeTexts)
+        Me.Invoke(safedelegate, length, 0, 0, 0) 'Invoke the TreadsafeDelegate
+
+        Dim writeStream As New IO.FileStream(Me.whereToSave, IO.FileMode.Create)
+
+        'Replacement for Stream.Position (webResponse stream doesn't support seek)
+        Dim nRead As Integer
+
+        'To calculate the download speed
+        Dim speedtimer As New Stopwatch
+        Dim currentspeed As Double = -1
+        Dim readings As Integer = 0
+
+        Do
+
+            If BackgroundWorker1.CancellationPending Then 'If user abort download
+                Exit Do
+            End If
+
+            speedtimer.Start()
+
+            Dim readBytes(4095) As Byte
+            Dim bytesread As Integer = theResponse.GetResponseStream.Read(readBytes, 0, 4096)
+
+            nRead += bytesread
+            Dim percent As Short = (nRead * 100) / length
+
+            Me.Invoke(safedelegate, length, nRead, percent, currentspeed)
+
+            If bytesread = 0 Then Exit Do
+
+            writeStream.Write(readBytes, 0, bytesread)
+
+            speedtimer.Stop()
+
+            readings += 1
+            If readings >= 5 Then 'For increase precision, the speed it's calculated only every five cicles
+                currentspeed = 20480 / (speedtimer.ElapsedMilliseconds / 1000)
+                speedtimer.Reset()
+                readings = 0
+            End If
+        Loop
+
+        'Close the streams
+        theResponse.GetResponseStream.Close()
+        writeStream.Close()
+
+        If Me.BackgroundWorker1.CancellationPending Then
+
+            IO.File.Delete(Me.whereToSave)
+
+            Dim cancelDelegate As New DownloadCompleteSafe(AddressOf DownloadComplete)
+
+            Me.Invoke(cancelDelegate, True)
+
+            Exit Sub
+
+        End If
+
+        Dim completeDelegate As New DownloadCompleteSafe(AddressOf DownloadComplete)
+
+        Me.Invoke(completeDelegate, False)
+
+    End Sub
+
+    Sub BtnDownloadClick(sender As Object, e As EventArgs)
+
+    End Sub
+    Public Sub DownloadComplete(ByVal cancelled As Boolean)
+
+    End Sub
+#End Region
 
 
     Private Sub btnLogin_Click_1(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
@@ -107,7 +225,7 @@ Public Class FrmClientScreen
         Try
 
             If chkRememberMe.Checked = True Then
-                My.Settings.Username = CboUser.Text
+                My.Settings.Username = txtUsername.Text
                 My.Settings.Password = txtPassword.Text
                 My.Settings.RememberUserPass = True
             Else
@@ -117,9 +235,9 @@ Public Class FrmClientScreen
             End If
 
             If My.Settings.AutoLogin = False Then
-                Process.Start(Application.StartupPath & "\minecraft.exe", CboUser.Text & " " & txtPassword.Text)
+                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text)
             Else
-                Process.Start(Application.StartupPath & "\minecraft.exe", CboUser.Text & " " & txtPassword.Text & " " & My.Settings.LastServer)
+                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text & " " & My.Settings.LastServer)
             End If
             Application.Exit()
         Catch ex As Exception
@@ -127,18 +245,28 @@ Public Class FrmClientScreen
         End Try
 
     End Sub
-    Function gettwitter()
+    Function GetTwitterMyCode()
+        Dim apppath As String = Application.StartupPath
+        Dim Doc As XmlReader = New XmlTextReader(apppath & "\load\IN.xml")
 
-        'Check to see if file is there and replace it
-        If My.Computer.FileSystem.FileExists(loc & "\Load\IN.xml") = True Then
-            My.Computer.FileSystem.DeleteFile(loc & "\Load\IN.xml")
-            My.Computer.Network.DownloadFile("http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=KB_Gaming", loc & "\Load\IN.xml")
+
+    End Function
+    Sub gettwitter()
+        If My.Computer.Network.Ping("www.google.com") = True Then
+            'Check to see if file is there and replace it
+            If My.Computer.FileSystem.FileExists(loc & "\Load\IN.xml") = True Then
+                My.Computer.FileSystem.DeleteFile(loc & "\Load\IN.xml")
+                My.Computer.Network.DownloadFile("http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=KB_Gaming", loc & "\Load\IN.xml")
+            Else
+                My.Computer.Network.DownloadFile("http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=KB_Gaming", loc & "\Load\IN.xml")
+
+            End If
+
         Else
-            My.Computer.Network.DownloadFile("http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=KB_Gaming", loc & "\Load\IN.xml")
 
+            Exit Sub
+            'Actually finds la tweet date and txt
         End If
-        'Actually finds la tweet date and txt
-
         count = 1
         If System.IO.File.Exists(loc & "\Load\IN.xml") And count <= 6 Then
             Dim Doc As XmlReader = New XmlTextReader(loc & "\Load\IN.xml")
@@ -181,16 +309,40 @@ Public Class FrmClientScreen
         Else
             MessageBox.Show("Cannot Find Twitter Feed")
         End If
-    End Function
-    Private Sub FrmClientScreen_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
-     
-        PingAllServers()
+    End Sub
+    Private Sub Remember()
+        If My.Settings.RememberUserPass = True Then
+            txtPassword.Text = My.Settings.Password
+            txtUsername.Text = My.Settings.Username
+            chkRememberMe.Checked = True
+        Else
+            chkRememberMe.Checked = False
+        End If
+    End Sub
+
+    Sub FirstInstall()
+
+        'CreateFolders
+        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "\Packs")
+        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "\Backup")
+        If My.Computer.FileSystem.DirectoryExists(LauncherFolder) Then
+
+        End If
     End Sub
 
     Private Sub FrmClientScreen_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
+           
 
+            Remember()
+            CboMinecraftVersion.SelectedIndex = 0
             gettwitter()
+
+            PingAllServers()
+            UpdateTimer.Start()
+            If My.Computer.FileSystem.FileExists(Application.ExecutablePath & ".old") Then
+                My.Computer.FileSystem.DeleteFile(Application.ExecutablePath & ".old")
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
 
@@ -207,4 +359,45 @@ Public Class FrmClientScreen
     End Sub
 
 
+    Private Sub btnEdit_Click(sender As System.Object, e As System.EventArgs) Handles btnEdit.Click
+        FrmMinecraftLocations.ShowDialog()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateTimer.Tick
+        Dim SAPI
+        SAPI = CreateObject("SAPI.spvoice")
+
+
+        Dim AppName As String = Application.ExecutablePath
+        Dim AppNameNew As String = Application.StartupPath + "launcher.old"
+        Dim update As New Update
+        If update.Update > Application.ProductVersion Then
+            SAPI.Speak("Hey a new update is availible I'm going to start downloading it.")
+            'Stop the timer from repeating endlessly
+            UpdateTimer.Enabled = False
+            'Do Update Stuff
+            MsgBox("New update availible at " & update.GetDynamicLink)
+
+            'rename & delete the old file 
+
+            'download
+            MsgBox("Restarting to finish updates to client.", MsgBoxStyle.Information)
+            Application.Restart()
+            'Me.BackgroundWorker1.RunWorkerAsync() 'run download
+        Else
+
+            UpdateTimer.Enabled = False
+            UpdateTimer.Stop()
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As System.Object, e As System.EventArgs) Handles btnRefresh.Click
+        PingAllServers()
+    End Sub
+
+    Function DownloadFile()
+
+    End Function
 End Class

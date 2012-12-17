@@ -29,24 +29,25 @@ Partial Class FrmClientScreen
         Me.lblTotalProgress = New System.Windows.Forms.Label()
         Me.lblProgress = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.btnEdit = New System.Windows.Forms.Button()
         Me.chkRememberMe = New System.Windows.Forms.CheckBox()
-        Me.CboUser = New System.Windows.Forms.ComboBox()
+        Me.CboMinecraftVersion = New System.Windows.Forms.ComboBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.BtnOptions = New System.Windows.Forms.Button()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rtxtTwitter = New System.Windows.Forms.RichTextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblMinecraftLoginServers = New System.Windows.Forms.Label()
         Me.lblMinecraftdotnet = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblEventServer = New System.Windows.Forms.Label()
         Me.lblTFCR = New System.Windows.Forms.Label()
         Me.lblER = New System.Windows.Forms.Label()
         Me.lblMining = New System.Windows.Forms.Label()
@@ -54,7 +55,9 @@ Partial Class FrmClientScreen
         Me.lblProgressInfo = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.UpdateTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -95,39 +98,59 @@ Partial Class FrmClientScreen
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtUsername)
+        Me.GroupBox2.Controls.Add(Me.btnEdit)
         Me.GroupBox2.Controls.Add(Me.chkRememberMe)
-        Me.GroupBox2.Controls.Add(Me.CboUser)
+        Me.GroupBox2.Controls.Add(Me.CboMinecraftVersion)
         Me.GroupBox2.Controls.Add(Me.txtPassword)
         Me.GroupBox2.Controls.Add(Me.BtnOptions)
         Me.GroupBox2.Controls.Add(Me.btnLogin)
-        Me.GroupBox2.Location = New System.Drawing.Point(337, 202)
+        Me.GroupBox2.Location = New System.Drawing.Point(337, 181)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(284, 100)
+        Me.GroupBox2.Size = New System.Drawing.Size(284, 121)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Login"
         '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(6, 48)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(181, 20)
+        Me.txtUsername.TabIndex = 20
+        '
+        'btnEdit
+        '
+        Me.btnEdit.Location = New System.Drawing.Point(193, 17)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(75, 23)
+        Me.btnEdit.TabIndex = 19
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = True
+        '
         'chkRememberMe
         '
         Me.chkRememberMe.AutoSize = True
-        Me.chkRememberMe.Location = New System.Drawing.Point(14, 76)
+        Me.chkRememberMe.Location = New System.Drawing.Point(6, 101)
         Me.chkRememberMe.Name = "chkRememberMe"
-        Me.chkRememberMe.Size = New System.Drawing.Size(92, 17)
+        Me.chkRememberMe.Size = New System.Drawing.Size(95, 17)
         Me.chkRememberMe.TabIndex = 18
-        Me.chkRememberMe.Text = "RememberMe"
+        Me.chkRememberMe.Text = "Remember Me"
         Me.chkRememberMe.UseVisualStyleBackColor = True
         '
-        'CboUser
+        'CboMinecraftVersion
         '
-        Me.CboUser.FormattingEnabled = True
-        Me.CboUser.Location = New System.Drawing.Point(14, 21)
-        Me.CboUser.Name = "CboUser"
-        Me.CboUser.Size = New System.Drawing.Size(181, 21)
-        Me.CboUser.TabIndex = 18
+        Me.CboMinecraftVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboMinecraftVersion.FormattingEnabled = True
+        Me.CboMinecraftVersion.Items.AddRange(New Object() {"IndustrialRage Pack", "Endless Rage", "TerraFirmaRage Pack", "Vanilla"})
+        Me.CboMinecraftVersion.Location = New System.Drawing.Point(6, 19)
+        Me.CboMinecraftVersion.Name = "CboMinecraftVersion"
+        Me.CboMinecraftVersion.Size = New System.Drawing.Size(181, 21)
+        Me.CboMinecraftVersion.TabIndex = 18
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(14, 50)
+        Me.txtPassword.Location = New System.Drawing.Point(6, 75)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(181, 20)
         Me.txtPassword.TabIndex = 3
@@ -135,7 +158,7 @@ Partial Class FrmClientScreen
         '
         'BtnOptions
         '
-        Me.BtnOptions.Location = New System.Drawing.Point(201, 21)
+        Me.BtnOptions.Location = New System.Drawing.Point(193, 46)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(75, 23)
         Me.BtnOptions.TabIndex = 1
@@ -144,7 +167,7 @@ Partial Class FrmClientScreen
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(201, 50)
+        Me.btnLogin.Location = New System.Drawing.Point(193, 75)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
         Me.btnLogin.TabIndex = 0
@@ -156,7 +179,7 @@ Partial Class FrmClientScreen
         Me.GroupBox1.Controls.Add(Me.rtxtTwitter)
         Me.GroupBox1.Location = New System.Drawing.Point(5, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(326, 184)
+        Me.GroupBox1.Size = New System.Drawing.Size(326, 163)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Twitter"
@@ -164,41 +187,49 @@ Partial Class FrmClientScreen
         'rtxtTwitter
         '
         Me.rtxtTwitter.BackColor = System.Drawing.Color.White
-        Me.rtxtTwitter.Location = New System.Drawing.Point(14, 19)
+        Me.rtxtTwitter.Location = New System.Drawing.Point(7, 15)
         Me.rtxtTwitter.Name = "rtxtTwitter"
         Me.rtxtTwitter.ReadOnly = True
-        Me.rtxtTwitter.Size = New System.Drawing.Size(306, 159)
+        Me.rtxtTwitter.Size = New System.Drawing.Size(313, 142)
         Me.rtxtTwitter.TabIndex = 0
         Me.rtxtTwitter.Text = ""
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.btnRefresh)
         Me.GroupBox3.Controls.Add(Me.Label7)
         Me.GroupBox3.Controls.Add(Me.Label6)
         Me.GroupBox3.Controls.Add(Me.lblMinecraftLoginServers)
         Me.GroupBox3.Controls.Add(Me.lblMinecraftdotnet)
-        Me.GroupBox3.Controls.Add(Me.Label5)
         Me.GroupBox3.Controls.Add(Me.Label4)
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Controls.Add(Me.lblEventServer)
         Me.GroupBox3.Controls.Add(Me.lblTFCR)
         Me.GroupBox3.Controls.Add(Me.lblER)
         Me.GroupBox3.Controls.Add(Me.lblMining)
         Me.GroupBox3.Controls.Add(Me.lblIR)
         Me.GroupBox3.Location = New System.Drawing.Point(337, 12)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(284, 184)
+        Me.GroupBox3.Size = New System.Drawing.Size(284, 163)
         Me.GroupBox3.TabIndex = 17
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Server Statuses"
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Location = New System.Drawing.Point(193, 19)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
+        Me.btnRefresh.TabIndex = 14
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.Color.Red
-        Me.Label7.Location = New System.Drawing.Point(133, 156)
+        Me.Label7.Location = New System.Drawing.Point(133, 134)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 13)
         Me.Label7.TabIndex = 13
@@ -208,7 +239,7 @@ Partial Class FrmClientScreen
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.Color.Red
-        Me.Label6.Location = New System.Drawing.Point(133, 133)
+        Me.Label6.Location = New System.Drawing.Point(133, 111)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 12
@@ -217,7 +248,7 @@ Partial Class FrmClientScreen
         'lblMinecraftLoginServers
         '
         Me.lblMinecraftLoginServers.AutoSize = True
-        Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(9, 156)
+        Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(9, 134)
         Me.lblMinecraftLoginServers.Name = "lblMinecraftLoginServers"
         Me.lblMinecraftLoginServers.Size = New System.Drawing.Size(122, 13)
         Me.lblMinecraftLoginServers.TabIndex = 11
@@ -226,21 +257,11 @@ Partial Class FrmClientScreen
         'lblMinecraftdotnet
         '
         Me.lblMinecraftdotnet.AutoSize = True
-        Me.lblMinecraftdotnet.Location = New System.Drawing.Point(59, 133)
+        Me.lblMinecraftdotnet.Location = New System.Drawing.Point(59, 111)
         Me.lblMinecraftdotnet.Name = "lblMinecraftdotnet"
         Me.lblMinecraftdotnet.Size = New System.Drawing.Size(72, 13)
         Me.lblMinecraftdotnet.TabIndex = 10
         Me.lblMinecraftdotnet.Text = "Minecraft.net:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.Red
-        Me.Label5.Location = New System.Drawing.Point(133, 111)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(37, 13)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Offline"
         '
         'Label4
         '
@@ -281,15 +302,6 @@ Partial Class FrmClientScreen
         Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Offline"
-        '
-        'lblEventServer
-        '
-        Me.lblEventServer.AutoSize = True
-        Me.lblEventServer.Location = New System.Drawing.Point(65, 111)
-        Me.lblEventServer.Name = "lblEventServer"
-        Me.lblEventServer.Size = New System.Drawing.Size(65, 13)
-        Me.lblEventServer.TabIndex = 4
-        Me.lblEventServer.Text = "Test Server:"
         '
         'lblTFCR
         '
@@ -343,9 +355,9 @@ Partial Class FrmClientScreen
         Me.GroupBox4.Controls.Add(Me.PbrTotal)
         Me.GroupBox4.Controls.Add(Me.lblTotalProgress)
         Me.GroupBox4.Controls.Add(Me.lblProgress)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 202)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 181)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(319, 100)
+        Me.GroupBox4.Size = New System.Drawing.Size(319, 116)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Progress"
@@ -358,6 +370,17 @@ Partial Class FrmClientScreen
         Me.ImageList1.Images.SetKeyName(1, "Sand Texture.bmp")
         Me.ImageList1.Images.SetKeyName(2, "t.bmp")
         Me.ImageList1.Images.SetKeyName(3, "keen.jpg")
+        '
+        'UpdateTimer
+        '
+        Me.UpdateTimer.Interval = 500
+        '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        '
+        'BackgroundWorker1
+        '
         '
         'FrmClientScreen
         '
@@ -402,10 +425,8 @@ Partial Class FrmClientScreen
     Friend WithEvents lblMining As System.Windows.Forms.Label
     Friend WithEvents lblER As System.Windows.Forms.Label
     Friend WithEvents lblTFCR As System.Windows.Forms.Label
-    Friend WithEvents lblEventServer As System.Windows.Forms.Label
-    Friend WithEvents CboUser As System.Windows.Forms.ComboBox
+    Friend WithEvents CboMinecraftVersion As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -418,6 +439,11 @@ Partial Class FrmClientScreen
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents rtxtTwitter As System.Windows.Forms.RichTextBox
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents UpdateTimer As System.Windows.Forms.Timer
+    Friend WithEvents btnEdit As System.Windows.Forms.Button
+    Friend WithEvents txtUsername As System.Windows.Forms.TextBox
+    Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
+    Friend WithEvents btnRefresh As System.Windows.Forms.Button
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 
 End Class

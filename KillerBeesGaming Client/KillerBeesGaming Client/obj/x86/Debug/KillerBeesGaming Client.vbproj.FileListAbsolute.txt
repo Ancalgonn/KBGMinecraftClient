@@ -26,3 +26,4 @@ C:\Users\Jonathan\Desktop\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesG
 C:\Users\Jonathan\Desktop\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Jonathan\Desktop\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\Jonathan\Desktop\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\Jonathan\Desktop\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\KillerBeesGaming_Client.FrmMinecraftLocations.resources

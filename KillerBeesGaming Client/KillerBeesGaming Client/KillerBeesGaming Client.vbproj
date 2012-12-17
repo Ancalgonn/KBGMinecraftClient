@@ -65,7 +65,8 @@
     <OptionInfer>Off</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\new design.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -73,6 +74,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,9 +94,17 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Dialogs.vb" />
+    <Compile Include="Classes\DsFavorites.vb" />
     <Compile Include="Classes\ErrorReporting.vb" />
+    <Compile Include="Classes\FileDownloader.vb" />
     <Compile Include="Classes\MinecraftLib.vb" />
-    <Compile Include="Classes\Security.vb" />
+    <Compile Include="Classes\Update.vb" />
+    <Compile Include="Data\DsFavorites.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsFavorites.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmClientScreen.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +144,9 @@
     <EmbeddedResource Include="Forms\FrmClientScreen.resx">
       <DependentUpon>FrmClientScreen.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmMinecraftLocations.resx">
+      <DependentUpon>FrmMinecraftLocations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOption.resx">
       <DependentUpon>FrmOption.vb</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +159,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\DsFavorites.xsc">
+      <DependentUpon>DsFavorites.xsd</DependentUpon>
+    </None>
+    <None Include="Data\DsFavorites.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsFavorites.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Data\DsFavorites.xss">
+      <DependentUpon>DsFavorites.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -159,10 +183,6 @@
   <ItemGroup>
     <None Include="Background.png" />
     <Content Include="ChangeLog.txt" />
-    <Content Include="Images\Back colored background.ico" />
-    <Content Include="Images\gray colored.ico" />
-    <Content Include="Images\new design.ico" />
-    <Content Include="Images\No background.ico" />
     <None Include="lower texture.png" />
   </ItemGroup>
   <ItemGroup>
