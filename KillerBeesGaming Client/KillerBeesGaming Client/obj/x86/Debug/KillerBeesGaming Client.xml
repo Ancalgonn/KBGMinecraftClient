@@ -6,7 +6,36 @@ KillerBeesGamingClient
 </name>
 </assembly>
 <members>
-<member name="F:KillerBeesGaming_Client.Bn.Classes.FileDownloader.FileInfo.Path">
+<member name="P:KillerBeesGaming_Client.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:KillerBeesGaming_Client.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:KillerBeesGaming_Client.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:KillerBeesGaming_Client.DsFavorites">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="F:KillerBeesGaming_Client.Bn.Classes.FileDownloader.FileInfo.Path">
 	<summary>The complete path of the file (directory + filename)</summary>
 </member><member name="F:KillerBeesGaming_Client.Bn.Classes.FileDownloader.FileInfo.Name">
 	<summary>The name of the file</summary>
@@ -128,35 +157,6 @@ KillerBeesGamingClient
 </member><member name="T:KillerBeesGaming_Client.Bn.Classes.FileDownloader">
 	<summary>Class for downloading files in the background that supports info about their progress, the total progress, cancellation, pausing, and resuming. The downloads will run on a separate thread so you don't have to worry about multihreading yourself. </summary>
 	<remarks>Class FileDownloader v1.0.3, by De Dauw Jeroen - May 2009</remarks>
-</member><member name="P:KillerBeesGaming_Client.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:KillerBeesGaming_Client.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:KillerBeesGaming_Client.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsDataTable">
-	<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsRow">
-	<summary>
-Represents strongly named DataRow class.
-</summary>
-</member><member name="T:KillerBeesGaming_Client.DsFavorites.ZipsRowChangeEvent">
-	<summary>
-Row event argument class
-</summary>
-</member><member name="T:KillerBeesGaming_Client.DsFavorites">
-	<summary>
-Represents a strongly typed in-memory cache of data.
-</summary>
 </member>
 </members>
 </doc>
