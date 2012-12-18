@@ -97,7 +97,6 @@
     <Compile Include="Classes\Dialogs.vb" />
     <Compile Include="Classes\DsFavorites.vb" />
     <Compile Include="Classes\ErrorReporting.vb" />
-    <Compile Include="Classes\FileDownloader.vb" />
     <Compile Include="Classes\MinecraftLib.vb" />
     <Compile Include="Classes\Update.vb" />
     <Compile Include="Data\DsFavorites.Designer.vb">

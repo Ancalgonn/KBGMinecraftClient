@@ -58,6 +58,7 @@ Partial Class FrmClientScreen
         Me.UpdateTimer = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -196,6 +197,7 @@ Partial Class FrmClientScreen
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.btnRefresh)
         Me.GroupBox3.Controls.Add(Me.Label7)
         Me.GroupBox3.Controls.Add(Me.Label6)
@@ -379,8 +381,14 @@ Partial Class FrmClientScreen
         '
         Me.NotifyIcon1.Text = "NotifyIcon1"
         '
-        'BackgroundWorker1
+        'Button1
         '
+        Me.Button1.Location = New System.Drawing.Point(193, 49)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "New!"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FrmClientScreen
         '
@@ -445,5 +453,6 @@ Partial Class FrmClientScreen
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class
