@@ -3,16 +3,20 @@ Imports System.Net.Sockets
 Imports System.Xml
 Imports System.ComponentModel
 Imports KillerBeesGaming_Client.Update
+Imports System.IO
+
 Public Class FrmClientScreen
     Dim LauncherFolder As String = Application.StartupPath & "\Killerbees Gaming Client\"
     Dim WithEvents WC2 As New WebClient
+
 #Region "Loadup Actions"
     Private MinecraftExists As Boolean = My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\minecraft.exe")
     Dim Blank, laname, txttweet, createdat, link, fileloc, filename As String
     Dim count, filesize, ammount As Integer
     Dim wc As WebClient
     Dim loc As String = Application.StartupPath
-    Private Property java As Object
+    Public Property java As Object
+    Dim update As New Update
 #End Region
 
 #Region "Functions"
@@ -73,7 +77,7 @@ Public Class FrmClientScreen
         End If
 
         ProgressUpdate(100, 100)
-   
+
         lblProgressInfo.Text = "Server Pings Complete!"
     End Sub
     Private Sub ProgressUpdate(ByVal ProgressBar As Integer, ByVal Label As Integer)
@@ -98,7 +102,6 @@ Public Class FrmClientScreen
     Private Sub btnLogin_Click_1(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
 
         Try
-
             If chkRememberMe.Checked = True Then
                 My.Settings.Username = txtUsername.Text
                 My.Settings.Password = txtPassword.Text
@@ -109,13 +112,24 @@ Public Class FrmClientScreen
                 My.Settings.Password = Nothing
             End If
 
-            If My.Settings.AutoLogin = False Then
-                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text)
-            Else
-                Process.Start(Application.StartupPath & "\minecraft.exe", txtUsername.Text & " " & txtPassword.Text & " " & My.Settings.LastServer)
-            End If
-            Application.Exit()
+            My.Settings.LastIndexServer = CboMinecraftVersion.SelectedIndex
+            ' If CboMinecraftVersion.SelectedItem = "" Then
+
+            ' ElseIf CboMinecraftVersion.SelectedItem = "" Then
+
+            ' ElseIf CboMinecraftVersion.SelectedItem = "" Then
+
+            '  Else
+
+            '  End If
+            java = CreateObject("WScript.Shell")
+            java.Environment("PROCESS")("APPDATA") = LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
+            java.Run("Minecraft.exe " + txtUsername.Text + " " + txtPassword.Text)
+            Me.Close()
+
+
         Catch ex As Exception
+
             MsgBox(ex.Message)
         End Try
 
@@ -176,27 +190,48 @@ Public Class FrmClientScreen
             chkRememberMe.Checked = False
         End If
     End Sub
-
+    Public Function CheckVersion(Link As String)
+        Dim web As New Net.WebClient
+        Dim updatelink As String = Link
+        Return web.DownloadString(updatelink)
+    End Function
 
     Private Sub FrmClientScreen_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        
 
 
-            Remember()
-            CboMinecraftVersion.SelectedIndex = 0
-            gettwitter()
+        'remember user settings
+        Remember()
 
-            PingAllServers()
+        'this is update stuffs
+        If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "Packs") = False Then
+            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "Packs")
+        End If
+        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\KillerBeesGaming Client2.exe") = True Then
 
-            If My.Computer.FileSystem.FileExists(Application.StartupPath & "\KillerBeesGaming Client2.exe") = True Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\KillerBeesGaming Client.exe")
+            My.Computer.FileSystem.RenameFile(Application.StartupPath & "\KillerBeesGaming Client2.exe", "KillerBeesGaming Client.exe")
+        Else
 
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\KillerBeesGaming Client.exe")
-                My.Computer.FileSystem.RenameFile(Application.StartupPath & "\KillerBeesGaming Client2.exe", "KillerBeesGaming Client.exe")
-            Else
+        End If
+        ' Make a reference to a directory.
+        Dim di As New DirectoryInfo(LauncherFolder & "Packs\")
+        ' Get a reference to each directory in that directory.
+        Dim diArr As DirectoryInfo() = di.GetDirectories()
+        ' Populate Combobox.
+        Dim dri As DirectoryInfo
+        For Each dri In diArr
+            CboMinecraftVersion.Items.Add(dri.Name)
+        Next dri
+        'make the first item selected
+        CboMinecraftVersion.SelectedIndex = My.Settings.LastIndexServer
+        'get and display twitter
+        gettwitter()
+        'ping all minecraft servers
+        PingAllServers()
 
-            End If
-            UpdateTimer.Start()
-            
+        'check for updates!
+        UpdateTimer.Start()
+
     End Sub
 
     Private Sub rtxtTwitter_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkClickedEventArgs) Handles rtxtTwitter.LinkClicked
@@ -214,9 +249,10 @@ Public Class FrmClientScreen
 
     Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateTimer.Tick
         Try
+            Me.Text = "KBG Client v" & Application.ProductVersion & " Beta"
             UpdateTimer.Enabled = False
 
-            Dim update As New Update
+
             If update.Update > Application.ProductVersion Then
                 'Stop the timer from repeating endlessly
                 UpdateTimer.Enabled = False
@@ -260,5 +296,5 @@ Public Class FrmClientScreen
 
     End Sub
 
-    
+
 End Class

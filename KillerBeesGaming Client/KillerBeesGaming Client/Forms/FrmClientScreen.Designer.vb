@@ -58,7 +58,6 @@ Partial Class FrmClientScreen
         Me.UpdateTimer = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -118,14 +117,15 @@ Partial Class FrmClientScreen
         Me.txtUsername.Location = New System.Drawing.Point(6, 48)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(181, 20)
-        Me.txtUsername.TabIndex = 20
+        Me.txtUsername.TabIndex = 1
         '
         'btnEdit
         '
+        Me.btnEdit.Enabled = False
         Me.btnEdit.Location = New System.Drawing.Point(193, 17)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(75, 23)
-        Me.btnEdit.TabIndex = 19
+        Me.btnEdit.TabIndex = 5
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = True
         '
@@ -143,8 +143,8 @@ Partial Class FrmClientScreen
         '
         Me.CboMinecraftVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboMinecraftVersion.FormattingEnabled = True
-        Me.CboMinecraftVersion.Items.AddRange(New Object() {"IndustrialRage Pack", "Endless Rage", "TerraFirmaRage Pack", "Vanilla"})
         Me.CboMinecraftVersion.Location = New System.Drawing.Point(6, 19)
+        Me.CboMinecraftVersion.MaxDropDownItems = 10
         Me.CboMinecraftVersion.Name = "CboMinecraftVersion"
         Me.CboMinecraftVersion.Size = New System.Drawing.Size(181, 21)
         Me.CboMinecraftVersion.TabIndex = 18
@@ -154,7 +154,7 @@ Partial Class FrmClientScreen
         Me.txtPassword.Location = New System.Drawing.Point(6, 75)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(181, 20)
-        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.TabIndex = 2
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'BtnOptions
@@ -162,7 +162,7 @@ Partial Class FrmClientScreen
         Me.BtnOptions.Location = New System.Drawing.Point(193, 46)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(75, 23)
-        Me.BtnOptions.TabIndex = 1
+        Me.BtnOptions.TabIndex = 4
         Me.BtnOptions.Text = "Option"
         Me.BtnOptions.UseVisualStyleBackColor = True
         '
@@ -171,7 +171,7 @@ Partial Class FrmClientScreen
         Me.btnLogin.Location = New System.Drawing.Point(193, 75)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
-        Me.btnLogin.TabIndex = 0
+        Me.btnLogin.TabIndex = 3
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
@@ -197,7 +197,6 @@ Partial Class FrmClientScreen
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.btnRefresh)
         Me.GroupBox3.Controls.Add(Me.Label7)
         Me.GroupBox3.Controls.Add(Me.Label6)
@@ -381,15 +380,6 @@ Partial Class FrmClientScreen
         '
         Me.NotifyIcon1.Text = "NotifyIcon1"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(193, 49)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "New!"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'FrmClientScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -453,6 +443,5 @@ Partial Class FrmClientScreen
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class
