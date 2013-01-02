@@ -1,5 +1,5 @@
 -------------------------------------------------
-KillerBees Minecraft Launcher Readme v1.0 - beta
+KillerBees Minecraft Launcher Readme v2.0.0.0 - beta
 -------------------------------------------------
 
 Hello and welcome to the readme this file is indended for the coder and reviewers of the source code, lets move on shall we?
@@ -20,6 +20,7 @@ Features Done
 -Remember user credentials
 -Upload source code to secure location
 -Twitter Module
+-Portable, relative paths
 
 
 Things that need done
@@ -31,8 +32,7 @@ Things that need done
 -Tooltips
 -Configurable news tab
 -Export mod list
-- Security
-- Languages
-- Multiple accounts
-- Portable, relative paths
+-Security
+-Languages
+-Multiple accounts
 -Backups

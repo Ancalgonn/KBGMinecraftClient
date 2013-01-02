@@ -394,7 +394,6 @@ Partial Class FrmClientScreen
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "FrmClientScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "KBG Client v2.0 Beta"

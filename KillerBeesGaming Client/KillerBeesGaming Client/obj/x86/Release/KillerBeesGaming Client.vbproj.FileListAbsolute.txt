@@ -16,3 +16,13 @@ C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Cl
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming Client.exe
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming Client.xml
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming Client.pdb
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Release\KillerBeesGaming Client.exe
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Release\KillerBeesGaming Client.pdb
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Release\KillerBeesGaming Client.xml
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming_Client.FrmClientScreen.resources
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming_Client.FrmMinecraftLocations.resources
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming_Client.FrmOption.resources
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming_Client.Resources.resources
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\GenerateResource.write.1.tlog

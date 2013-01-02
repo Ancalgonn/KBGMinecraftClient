@@ -4,10 +4,13 @@ Imports System.Xml
 Imports System.ComponentModel
 Imports KillerBeesGaming_Client.Update
 Imports System.IO
+Imports Ionic.Zip
+
 
 Public Class FrmClientScreen
     Dim LauncherFolder As String = Application.StartupPath & "\Killerbees Gaming Client\"
     Dim WithEvents WC2 As New WebClient
+    Dim CurrentPack As String
 
 #Region "Loadup Actions"
     Private MinecraftExists As Boolean = My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\minecraft.exe")
@@ -98,7 +101,29 @@ Public Class FrmClientScreen
     End Function
 #End Region
 
+#Region "Zip Functions"
+    Private Sub extract(folder As String)
 
+        Using zip As ZipFile = ZipFile.Read(FilePath)
+            zip.StatusMessageTextWriter = System.Console.Out
+            'Status Messages will be sent to the console during extraction
+            zip.ExtractAll(folder)
+        End Using
+    End Sub
+#End Region
+
+    Public Function RunMinecraft(Optional ByVal CloseOnOpen As Boolean = True)
+        java = CreateObject("WScript.Shell")
+        java.Environment("PROCESS")("APPDATA") = LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
+        java.Run("Minecraft.exe " + txtUsername.Text + " " + txtPassword.Text)
+
+
+        If CloseOnOpen = True Then
+            Me.Close()
+        Else
+            Exit Function
+        End If
+    End Function
     Private Sub btnLogin_Click_1(sender As System.Object, e As System.EventArgs) Handles btnLogin.Click
 
         Try
@@ -113,19 +138,33 @@ Public Class FrmClientScreen
             End If
 
             My.Settings.LastIndexServer = CboMinecraftVersion.SelectedIndex
-            ' If CboMinecraftVersion.SelectedItem = "" Then
 
-            ' ElseIf CboMinecraftVersion.SelectedItem = "" Then
+            Select Case CboMinecraftVersion.SelectedItem
 
-            ' ElseIf CboMinecraftVersion.SelectedItem = "" Then
+                Case "Industrial Rage"
+                    btnLogin.Enabled = False
+                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\bin\") = False Then
+                        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\IRpack.zip")
 
-            '  Else
+                    Else
+                        Exit Select
+                    End If
+                Case "TerraFirma Craft"
+                    btnLogin.Enabled = False
+                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\bin\") = False Then
+                        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\TFRpack.zip")
 
-            '  End If
-            java = CreateObject("WScript.Shell")
-            java.Environment("PROCESS")("APPDATA") = LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
-            java.Run("Minecraft.exe " + txtUsername.Text + " " + txtPassword.Text)
-            Me.Close()
+                    Else
+                        Exit Select
+                    End If
+
+                Case Else
+                    Exit Select
+            End Select
+
+            RunMinecraft()
 
 
         Catch ex As Exception
@@ -149,6 +188,8 @@ Public Class FrmClientScreen
         Else
 
             Exit Sub
+
+
             'Actually finds la tweet date and txt
         End If
         count = 1
@@ -225,9 +266,12 @@ Public Class FrmClientScreen
         'make the first item selected
         CboMinecraftVersion.SelectedIndex = My.Settings.LastIndexServer
         'get and display twitter
-        gettwitter()
+
+        '  gettwitter()
+
         'ping all minecraft servers
-        PingAllServers()
+
+        'PingAllServers()
 
         'check for updates!
         UpdateTimer.Start()
@@ -251,7 +295,8 @@ Public Class FrmClientScreen
         Try
             Me.Text = "KBG Client v" & Application.ProductVersion & " Beta"
             UpdateTimer.Enabled = False
-
+            PingAllServers()
+            gettwitter()
 
             If update.Update > Application.ProductVersion Then
                 'Stop the timer from repeating endlessly
@@ -284,17 +329,24 @@ Public Class FrmClientScreen
     End Sub
 
     Private Sub btnRefresh_Click(sender As System.Object, e As System.EventArgs) Handles btnRefresh.Click
+        Try
+            PingAllServers()
 
-        PingAllServers()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub WC_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs) Handles WC2.DownloadProgressChanged
         PbrProgress.Value = e.ProgressPercentage
-        PbrTotal.Value = e.ProgressPercentage
+        PbrTotal.Value = e.ProgressPercentage / 2
         lblProgress.Text = e.ProgressPercentage & "%"
-        lblTotalProgress.Text = e.ProgressPercentage & "%"
-
+        lblTotalProgress.Text = e.ProgressPercentage / 2 & "%"
+       
     End Sub
 
-
+    Public Sub DownloadComplete() Handles WC2.DownloadFileCompleted
+        'extract files!
+        MsgBox("Download Complete")
+    End Sub
 End Class
