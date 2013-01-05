@@ -2,6 +2,13 @@
 Public Class Update
     'use these classes to find version of current pack online,
     ' the actual version that the user has in the pack folder itself and can be used to compare the two.
+    Public Function LocalPackVersion()
+        Return My.Computer.FileSystem.ReadAllText(Application.StartupPath & _
+                                                  "\Killerbees Gaming Client\packs\" & FrmClientScreen.CboMinecraftVersion.SelectedItem & _
+                                                  "version.txt")
+
+    End Function
+  
     Public Function GetLauncherLink()
         Dim web As New Net.WebClient
         Dim updatelink As String = "http://dl.dropbox.com/u/95912365/DynamicLink.txt"

@@ -43,4 +43,6 @@ C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Cl
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Debug\ResGen.write.1.tlog
-C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\Ionic.Zip.dll
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\ZipHelper.dll
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Debug\ZipHelper.pdb

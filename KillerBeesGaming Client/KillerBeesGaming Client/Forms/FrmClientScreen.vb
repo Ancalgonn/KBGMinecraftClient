@@ -4,7 +4,8 @@ Imports System.Xml
 Imports System.ComponentModel
 Imports KillerBeesGaming_Client.Update
 Imports System.IO
-Imports Ionic.Zip
+Imports KellermanSoftware.SharpZipWrapper
+
 
 
 Public Class FrmClientScreen
@@ -101,16 +102,6 @@ Public Class FrmClientScreen
     End Function
 #End Region
 
-#Region "Zip Functions"
-    Private Sub extract(folder As String)
-
-        Using zip As ZipFile = ZipFile.Read(FilePath)
-            zip.StatusMessageTextWriter = System.Console.Out
-            'Status Messages will be sent to the console during extraction
-            zip.ExtractAll(folder)
-        End Using
-    End Sub
-#End Region
 
     Public Function RunMinecraft(Optional ByVal CloseOnOpen As Boolean = True)
         java = CreateObject("WScript.Shell")
@@ -143,28 +134,34 @@ Public Class FrmClientScreen
 
                 Case "Industrial Rage"
                     btnLogin.Enabled = False
-                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\bin\") = False Then
+                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\mods\") = False Then
+
+                        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
-                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\IRpack.zip")
+                        CurrentPack = "IRpack.zip"
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
 
                     Else
-                        Exit Select
+                        RunMinecraft()
                     End If
                 Case "TerraFirma Craft"
                     btnLogin.Enabled = False
-                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\bin\") = False Then
+                    If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\mods\") = False Then
+
+                        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
-                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\TFRpack.zip")
+                        CurrentPack = "TFRpack.zip"
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
 
                     Else
-                        Exit Select
+                        RunMinecraft()
                     End If
 
                 Case Else
                     Exit Select
             End Select
 
-            RunMinecraft()
+            'RunMinecraft()
 
 
         Catch ex As Exception
@@ -314,12 +311,26 @@ Public Class FrmClientScreen
                 MsgBox("Done now restarting to apply updates.")
                 Process.Start(Application.StartupPath & "\KillerBeesGaming Client2.exe")
 
-                Application.ExitThread()
+                '  Application.ExitThread()
 
             Else
 
                 UpdateTimer.Enabled = False
+                ' UpdateTimer.Stop()
+                Exit Sub
+            End If
+            If update.CheckIRPackVersion > update.LocalPackVersion Then
+                WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+            Else
+                UpdateTimer.Enabled = False
+                ' UpdateTimer.Stop()
+            End If
+            If update.CheckTFRPackVersion > update.LocalPackVersion Then
+                WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+            Else
+                UpdateTimer.Enabled = False
                 UpdateTimer.Stop()
+                Application.ExitThread()
                 Exit Sub
             End If
         Catch ex As Exception
@@ -339,14 +350,21 @@ Public Class FrmClientScreen
 
     Private Sub WC_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs) Handles WC2.DownloadProgressChanged
         PbrProgress.Value = e.ProgressPercentage
-        PbrTotal.Value = e.ProgressPercentage / 2
+        PbrTotal.Value = e.ProgressPercentage
         lblProgress.Text = e.ProgressPercentage & "%"
-        lblTotalProgress.Text = e.ProgressPercentage / 2 & "%"
-       
+        lblTotalProgress.Text = e.ProgressPercentage & "%"
+        lblProgressInfo.Text = "Downloading " & CboMinecraftVersion.SelectedItem & " Pack please wait."
     End Sub
 
     Public Sub DownloadComplete() Handles WC2.DownloadFileCompleted
         'extract files!
-        MsgBox("Download Complete")
+        MsgBox("Download Complete, please wait while we extract. During this time the launcher may freeze, this is normal just let it finish. When it is done it will run Minecraft.")
+        Dim oZipHelper As ZipHelper = New ZipHelper()
+        lblProgressInfo.Text = "Extracting Files To " & LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
+        ' PbrProgress.
+        oZipHelper.ExtractFilesFromZip(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem, "\")
+
+        RunMinecraft()
     End Sub
+
 End Class
