@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("KillerBees Minecraft Client")> 
+<Assembly: AssemblyTitle("Killerbees Minecraft Client")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("KB_Gaming")> 
 <Assembly: AssemblyProduct("KillerBeesGaming Client")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("2.0.0.0")> 
-<Assembly: AssemblyFileVersion("2.0.0.0")> 
+<Assembly: AssemblyVersion("2.1.0.0")> 
+<Assembly: AssemblyFileVersion("2.1.0.0")> 

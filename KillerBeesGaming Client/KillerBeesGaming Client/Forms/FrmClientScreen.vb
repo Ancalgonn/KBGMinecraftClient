@@ -4,9 +4,8 @@ Imports System.Xml
 Imports System.ComponentModel
 Imports KillerBeesGaming_Client.Update
 Imports System.IO
-Imports KellermanSoftware.SharpZipWrapper
-
-
+Imports Ionic.Zip
+Imports System.IO.Compression
 
 Public Class FrmClientScreen
     Dim LauncherFolder As String = Application.StartupPath & "\Killerbees Gaming Client\"
@@ -142,7 +141,16 @@ Public Class FrmClientScreen
                         WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
 
                     Else
-                        RunMinecraft()
+                        If update.CheckIRPackVersion > update.LocalPackVersion Then
+                            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
+                            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
+                            CurrentPack = "IRpack.zip"
+                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+
+                        Else
+                            RunMinecraft()
+                        End If
+
                     End If
                 Case "TerraFirma Craft"
                     btnLogin.Enabled = False
@@ -154,7 +162,16 @@ Public Class FrmClientScreen
                         WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
 
                     Else
-                        RunMinecraft()
+                        If update.CheckTFRPackVersion > update.LocalPackVersion Then
+                            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
+                            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
+                            CurrentPack = "TFRpack.zip"
+                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+
+                        Else
+                            RunMinecraft()
+                        End If
+
                     End If
 
                 Case Else
@@ -343,6 +360,8 @@ Public Class FrmClientScreen
         Try
             PingAllServers()
 
+            'Extract(LauncherFolder & "install\IRpack.zip" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\")
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -359,12 +378,29 @@ Public Class FrmClientScreen
     Public Sub DownloadComplete() Handles WC2.DownloadFileCompleted
         'extract files!
         MsgBox("Download Complete, please wait while we extract. During this time the launcher may freeze, this is normal just let it finish. When it is done it will run Minecraft.")
-        Dim oZipHelper As ZipHelper = New ZipHelper()
+        ' Dim oZipHelper As ZipHelper = New ZipHelper()
         lblProgressInfo.Text = "Extracting Files To " & LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
+        If My.Computer.FileSystem.FileExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\version.txt") Then
+            My.Computer.FileSystem.DeleteFile(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\version.txt")
+        End If
+        Extract(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\")
         ' PbrProgress.
-        oZipHelper.ExtractFilesFromZip(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem, "\")
+        'oZipHelper.ExtractFilesFromZip(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\", "")
 
         RunMinecraft()
+    End Sub
+    Private Sub Extract(ZipToUnpack As String, UnpackDirectory As String)
+
+
+        Using zip1 As ZipFile = ZipFile.Read(ZipToUnpack)
+            Dim e As ZipEntry
+            ' here, we extract every entry, but we could extract conditionally,
+            ' based on entry name, size, date, checkbox status, etc. 
+
+            For Each e In zip1
+                e.Extract(UnpackDirectory, ExtractExistingFileAction.OverwriteSilently)
+            Next
+        End Using
     End Sub
 
 End Class

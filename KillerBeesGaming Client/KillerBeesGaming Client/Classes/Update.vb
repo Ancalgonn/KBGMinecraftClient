@@ -5,7 +5,7 @@ Public Class Update
     Public Function LocalPackVersion()
         Return My.Computer.FileSystem.ReadAllText(Application.StartupPath & _
                                                   "\Killerbees Gaming Client\packs\" & FrmClientScreen.CboMinecraftVersion.SelectedItem & _
-                                                  "version.txt")
+                                                  "\version.txt")
 
     End Function
   
