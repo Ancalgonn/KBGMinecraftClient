@@ -13,42 +13,28 @@
         Me.Close()
     End Sub
 
-    Private Sub FrmOption_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Select Case My.Settings.LastIndexServer
 
-            Case 0
-                ComboBox1.SelectedIndex = 0
-            Case 1
-                ComboBox1.SelectedIndex = 1
-        End Select
-        If My.Settings.AutoLogin = True Then
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles btnForceUpdate.Click
+        Dim Force As New Update
+        MsgBox("Force Updating! This will overwrite everthing including your saved settings!" & vbNewLine & vbNewLine & "Please wait while the update completes.")
 
-            CheckBox1.Checked = True
+        Force.ForceUpdate()
+
+    End Sub
+
+    Private Sub chkCheck_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkCheck.CheckedChanged
+        If chkCheck.Checked = True Then
+            My.Settings.PingServers = True
         Else
-            CheckBox1.Checked = False
+            My.Settings.PingServers = False
         End If
     End Sub
 
-
-    Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
-            My.Settings.AutoLogin = True
-
+    Private Sub chktwitter_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chktwitter.CheckedChanged
+        If chktwitter.Checked = True Then
+            My.Settings.GetTwitter = True
         Else
-            My.Settings.AutoLogin = False
+            My.Settings.GetTwitter = False
         End If
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        Select Case ComboBox1.SelectedIndex
-
-            Case 0
-                My.Settings.LastServer = "ir.industrial-craft.net"
-                My.Settings.LastIndexServer = 0
-            Case 1
-                My.Settings.LastIndexServer = 1
-                My.Settings.LastServer = "mining.industrial-craft.net"
-
-        End Select
     End Sub
 End Class

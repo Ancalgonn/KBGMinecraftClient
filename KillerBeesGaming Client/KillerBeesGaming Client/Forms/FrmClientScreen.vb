@@ -1,25 +1,24 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
 Imports System.Xml
-Imports System.ComponentModel
-Imports KillerBeesGaming_Client.Update
 Imports System.IO
 Imports Ionic.Zip
-Imports System.IO.Compression
 
 Public Class FrmClientScreen
-    Dim LauncherFolder As String = Application.StartupPath & "\Killerbees Gaming Client\"
-    Dim WithEvents WC2 As New WebClient
-    Dim CurrentPack As String
+
 
 #Region "Loadup Actions"
-    Private MinecraftExists As Boolean = My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\minecraft.exe")
+
     Dim Blank, laname, txttweet, createdat, link, fileloc, filename As String
     Dim count, filesize, ammount As Integer
     Dim wc As WebClient
     Dim loc As String = Application.StartupPath
     Public Property java As Object
-    Dim update As New Update
+    Dim Update As New Update
+    Dim LauncherFolder As String = Application.StartupPath & "\Killerbees Gaming Client\"
+    Public WithEvents WC2 As New WebClient
+    Dim Backupfolder As String = LauncherFolder & "backup\"
+    Dim currentpack As String
 #End Region
 
 #Region "Functions"
@@ -83,12 +82,14 @@ Public Class FrmClientScreen
 
         lblProgressInfo.Text = "Server Pings Complete!"
     End Sub
+
     Private Sub ProgressUpdate(ByVal ProgressBar As Integer, ByVal Label As Integer)
         lblProgress.Text = Label & "%"
         lblTotalProgress.Text = Label & "%"
         PbrProgress.Value = ProgressBar
         PbrTotal.Value = ProgressBar
     End Sub
+
     Public Function ServerPing(ByVal IP As String, ByVal Port As Integer)
         'Connects to the server via a Tcp packet on a specified port, returns true if connection secessful
         Dim Server As New TcpClient
@@ -99,12 +100,58 @@ Public Class FrmClientScreen
             Return False
         End Try
     End Function
+
+    Public Function LocalPackVersion()
+
+        Return My.Computer.FileSystem.ReadAllText(Application.StartupPath & _
+                                                  "\Killerbees Gaming Client\packs\" & CboMinecraftVersion.SelectedItem & _
+"\version.txt")
+
+
+    End Function
 #End Region
 
+    Sub MoveMinecraftSettingsToBackup()
+        Dim CurrentMinecraftPackFolder As String = Application.StartupPath & "\Killerbees Gaming Client\packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\"
+        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "Backup")
+        If My.Computer.FileSystem.FileExists(CurrentMinecraftPackFolder & "options.txt") Then
+            My.Computer.FileSystem.MoveFile(CurrentMinecraftPackFolder & "options.txt", Backupfolder & "options.txt", True)
+        End If
+        If My.Computer.FileSystem.FileExists(CurrentMinecraftPackFolder & "servers.dat") Then
+            My.Computer.FileSystem.MoveFile(CurrentMinecraftPackFolder & "servers.dat", Backupfolder & "servers.dat", True)
+        End If
+        If My.Computer.FileSystem.FileExists(CurrentMinecraftPackFolder & "optionsof.txt") Then
+            My.Computer.FileSystem.MoveFile(CurrentMinecraftPackFolder & "optionsof.txt", Backupfolder & "optionsof.txt", True)
+        End If
+        If My.Computer.FileSystem.FileExists(CurrentMinecraftPackFolder & "mods\rei_minimap\keyconfig.txt") Then
+            My.Computer.FileSystem.CreateDirectory(LauncherFolder & "Backup\mods\rei_minimap\")
+            My.Computer.FileSystem.MoveFile(CurrentMinecraftPackFolder & "mods\rei_minimap\keyconfig.txt", Backupfolder & "mods\rei_minimap\keyconfig.txt", True)
+        End If
+    End Sub
+
+    Sub MoveMinecraftSettingsToOriginalFolder()
+        Dim CurrentMinecraftPackFolder As String = Application.StartupPath & "\Killerbees Gaming Client\packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\"
+        My.Computer.FileSystem.CreateDirectory(LauncherFolder & "Backup")
+        If My.Computer.FileSystem.FileExists(Backupfolder & "options.txt") Then
+            My.Computer.FileSystem.MoveFile(Backupfolder & "options.txt", CurrentMinecraftPackFolder & "options.txt", True)
+        End If
+        If My.Computer.FileSystem.FileExists(Backupfolder & "servers.dat") Then
+            My.Computer.FileSystem.MoveFile(Backupfolder & "servers.dat", CurrentMinecraftPackFolder & "servers.dat", True)
+        End If
+        If My.Computer.FileSystem.FileExists(Backupfolder & "optionsof.txt") Then
+            My.Computer.FileSystem.MoveFile(Backupfolder & "optionsof.txt", CurrentMinecraftPackFolder & "optionsof.txt", True)
+        End If
+        If My.Computer.FileSystem.FileExists(Backupfolder & "mods\rei_minimap\keyconfig.txt") Then
+            My.Computer.FileSystem.MoveFile(Backupfolder & "mods\rei_minimap\keyconfig.txt", CurrentMinecraftPackFolder & "mods\rei_minimap\keyconfig.txt", True)
+        End If
+        'delete the saved files so they can't cause an issue
+        My.Computer.FileSystem.DeleteDirectory(LauncherFolder & "Backup\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+    End Sub
 
     Public Function RunMinecraft(Optional ByVal CloseOnOpen As Boolean = True)
+
         java = CreateObject("WScript.Shell")
-        java.Environment("PROCESS")("APPDATA") = LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem
+        java.Environment("PROCESS")("APPDATA") = LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\"
         java.Run("Minecraft.exe " + txtUsername.Text + " " + txtPassword.Text)
 
 
@@ -132,20 +179,22 @@ Public Class FrmClientScreen
             Select Case CboMinecraftVersion.SelectedItem
 
                 Case "Industrial Rage"
-                    btnLogin.Enabled = False
+
                     If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\mods\") = False Then
 
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
-                        CurrentPack = "IRpack.zip"
-                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+                        currentPack = "IRpack.zip"
+                        MoveMinecraftSettingsToBackup()
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/" & currentpack), LauncherFolder & "install\IRpack.zip")
 
                     Else
-                        If update.CheckIRPackVersion > update.LocalPackVersion Then
+                        If Update.CheckIRPackVersion > LocalPackVersion() Then
                             My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                             My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
+                            MoveMinecraftSettingsToBackup()
                             CurrentPack = "IRpack.zip"
-                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/" & currentpack), LauncherFolder & "install\IRpack.zip")
 
                         Else
                             RunMinecraft()
@@ -153,29 +202,30 @@ Public Class FrmClientScreen
 
                     End If
                 Case "TerraFirma Craft"
-                    btnLogin.Enabled = False
+
                     If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\.minecraft\mods\") = False Then
 
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                         My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
                         CurrentPack = "TFRpack.zip"
-                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+                        MoveMinecraftSettingsToBackup()
+                        WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/" & currentpack), LauncherFolder & "install\" & currentpack)
 
                     Else
-                        If update.CheckTFRPackVersion > update.LocalPackVersion Then
+                        If Update.CheckTFRPackVersion > LocalPackVersion() Then
                             My.Computer.FileSystem.CreateDirectory(LauncherFolder & "packs\")
                             My.Computer.FileSystem.CreateDirectory(LauncherFolder & "install\")
                             CurrentPack = "TFRpack.zip"
-                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
+                            MoveMinecraftSettingsToBackup()
+                            WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/" & currentpack), LauncherFolder & "install\TFRpack.zip")
 
                         Else
                             RunMinecraft()
                         End If
-
                     End If
 
                 Case Else
-                    Exit Select
+                    RunMinecraft()
             End Select
 
             'RunMinecraft()
@@ -244,11 +294,23 @@ Public Class FrmClientScreen
         Else
             chkRememberMe.Checked = False
         End If
+        If My.Settings.PingServers = True Then
+            FrmOption.chkCheck.Checked = True
+        Else
+            FrmOption.chkCheck.Checked = False
+
+        End If
+        If My.Settings.GetTwitter = True Then
+            FrmOption.chktwitter.Checked = True
+        Else
+            FrmOption.chktwitter.Checked = False
+
+        End If
     End Sub
     Public Function CheckVersion(Link As String)
         Dim web As New Net.WebClient
-        Dim updatelink As String = Link
-        Return web.DownloadString(updatelink)
+        Dim updaterlink As String = Link
+        Return web.DownloadString(updaterlink)
     End Function
 
     Private Sub FrmClientScreen_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -257,7 +319,7 @@ Public Class FrmClientScreen
         'remember user settings
         Remember()
 
-        'this is update stuffs
+        'this is updater stuffs
         If My.Computer.FileSystem.DirectoryExists(LauncherFolder & "Packs") = False Then
             My.Computer.FileSystem.CreateDirectory(LauncherFolder & "Packs")
         End If
@@ -272,7 +334,6 @@ Public Class FrmClientScreen
         Dim di As New DirectoryInfo(LauncherFolder & "Packs\")
         ' Get a reference to each directory in that directory.
         Dim diArr As DirectoryInfo() = di.GetDirectories()
-        ' Populate Combobox.
         Dim dri As DirectoryInfo
         For Each dri In diArr
             CboMinecraftVersion.Items.Add(dri.Name)
@@ -287,7 +348,7 @@ Public Class FrmClientScreen
 
         'PingAllServers()
 
-        'check for updates!
+        'check for updaters!
         UpdateTimer.Start()
 
     End Sub
@@ -309,23 +370,31 @@ Public Class FrmClientScreen
         Try
             Me.Text = "KBG Client v" & Application.ProductVersion & " Beta"
             UpdateTimer.Enabled = False
-            PingAllServers()
-            gettwitter()
+            If My.Settings.PingServers = True Then
+                PingAllServers()
+            Else
 
-            If update.Update > Application.ProductVersion Then
+            End If
+            If My.Settings.GetTwitter = True Then
+                gettwitter()
+            Else
+
+            End If
+
+            If Update.Update > Application.ProductVersion Then
                 'Stop the timer from repeating endlessly
                 UpdateTimer.Enabled = False
                 UpdateTimer.Stop()
                 'Do Update Stuff
-                MsgBox("New launcher update! Downloading.")
+                MsgBox("New launcher updater! Downloading.")
                 lblProgressInfo.Text = "Downloading new launcher."
 
 
-                WC2.DownloadFile(New Uri(update.GetLauncherLink), Application.StartupPath & "\KillerBeesGaming Client2.exe")
+                WC2.DownloadFile(New Uri(Update.GetLauncherLink), Application.StartupPath & "\KillerBeesGaming Client2.exe")
 
 
-                ' MsgBox("Done now restarting to apply updates.")
-                MsgBox("Done now restarting to apply updates.")
+                ' MsgBox("Done now restarting to apply updaters.")
+                MsgBox("Done now restarting to apply updaters.")
                 Process.Start(Application.StartupPath & "\KillerBeesGaming Client2.exe")
 
                 '  Application.ExitThread()
@@ -336,13 +405,13 @@ Public Class FrmClientScreen
                 ' UpdateTimer.Stop()
                 Exit Sub
             End If
-            If update.CheckIRPackVersion > update.LocalPackVersion Then
+            If Update.CheckIRPackVersion > LocalPackVersion() Then
                 WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/IRpack.zip"), LauncherFolder & "install\" & CurrentPack)
             Else
                 UpdateTimer.Enabled = False
                 ' UpdateTimer.Stop()
             End If
-            If update.CheckTFRPackVersion > update.LocalPackVersion Then
+            If Update.CheckTFRPackVersion > LocalPackVersion() Then
                 WC2.DownloadFileAsync(New Uri("https://dl.dropbox.com/u/32095369/TFRpack.zip"), LauncherFolder & "install\" & CurrentPack)
             Else
                 UpdateTimer.Enabled = False
@@ -359,9 +428,7 @@ Public Class FrmClientScreen
     Private Sub btnRefresh_Click(sender As System.Object, e As System.EventArgs) Handles btnRefresh.Click
         Try
             PingAllServers()
-
-            'Extract(LauncherFolder & "install\IRpack.zip" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\")
-
+            gettwitter()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -383,9 +450,8 @@ Public Class FrmClientScreen
         If My.Computer.FileSystem.FileExists(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\version.txt") Then
             My.Computer.FileSystem.DeleteFile(LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\version.txt")
         End If
-        Extract(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\")
-        ' PbrProgress.
-        'oZipHelper.ExtractFilesFromZip(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem & "\", "")
+        Extract(LauncherFolder & "install\" & CurrentPack, LauncherFolder & "packs\" & CboMinecraftVersion.SelectedItem)
+        MoveMinecraftSettingsToOriginalFolder()
 
         RunMinecraft()
     End Sub
@@ -403,4 +469,16 @@ Public Class FrmClientScreen
         End Using
     End Sub
 
+    Private Sub PictureBox1_Click(sender As System.Object, e As System.EventArgs) Handles PictureBox1.Click
+        System.Diagnostics.Process.Start("http://www.killerbeesgaming.com")
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+
+        System.Diagnostics.Process.Start("https://twitter.com/KB_Gaming")
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        System.Diagnostics.Process.Start("http://www.killerbeesgaming.com")
+    End Sub
 End Class

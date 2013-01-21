@@ -29,12 +29,13 @@ Partial Class FrmOption
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.chkCheck = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnForceUpdate = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.chktwitter = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -95,43 +96,43 @@ Partial Class FrmOption
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 64)
+        Me.GroupBox3.Controls.Add(Me.chktwitter)
+        Me.GroupBox3.Controls.Add(Me.chkCheck)
+        Me.GroupBox3.Location = New System.Drawing.Point(132, 6)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(189, 55)
+        Me.GroupBox3.Size = New System.Drawing.Size(148, 113)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Server Name"
+        Me.GroupBox3.Text = "Load Options"
         '
-        'ComboBox1
+        'chkCheck
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"ir.industrial-craft.net", "mining.industrial-craft.net"})
-        Me.ComboBox1.Location = New System.Drawing.Point(6, 19)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(177, 21)
-        Me.ComboBox1.TabIndex = 1
+        Me.chkCheck.AutoSize = True
+        Me.chkCheck.Location = New System.Drawing.Point(6, 19)
+        Me.chkCheck.Name = "chkCheck"
+        Me.chkCheck.Size = New System.Drawing.Size(138, 17)
+        Me.chkCheck.TabIndex = 1
+        Me.chkCheck.Text = "Check for server status."
+        Me.chkCheck.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
+        Me.GroupBox2.Controls.Add(Me.btnForceUpdate)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(189, 45)
+        Me.GroupBox2.Size = New System.Drawing.Size(120, 113)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "General"
+        Me.GroupBox2.Text = "Update"
         '
-        'CheckBox1
+        'btnForceUpdate
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(127, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Auto Login To Server"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.btnForceUpdate.Location = New System.Drawing.Point(16, 19)
+        Me.btnForceUpdate.Name = "btnForceUpdate"
+        Me.btnForceUpdate.Size = New System.Drawing.Size(93, 23)
+        Me.btnForceUpdate.TabIndex = 3
+        Me.btnForceUpdate.Text = "Force Update"
+        Me.btnForceUpdate.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -158,9 +159,19 @@ Partial Class FrmOption
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(12, 177)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 13)
+        Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "V1.1 Beta"
+        Me.Label2.Text = "2.2.0.0 Beta"
+        '
+        'chktwitter
+        '
+        Me.chktwitter.AutoSize = True
+        Me.chktwitter.Location = New System.Drawing.Point(6, 42)
+        Me.chktwitter.Name = "chktwitter"
+        Me.chktwitter.Size = New System.Drawing.Size(111, 17)
+        Me.chktwitter.TabIndex = 2
+        Me.chktwitter.Text = "Get Twitter News."
+        Me.chktwitter.UseVisualStyleBackColor = True
         '
         'FrmOption
         '
@@ -181,8 +192,8 @@ Partial Class FrmOption
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
@@ -197,8 +208,9 @@ Partial Class FrmOption
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents btnForceUpdate As System.Windows.Forms.Button
+    Friend WithEvents chkCheck As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents chktwitter As System.Windows.Forms.CheckBox
 End Class

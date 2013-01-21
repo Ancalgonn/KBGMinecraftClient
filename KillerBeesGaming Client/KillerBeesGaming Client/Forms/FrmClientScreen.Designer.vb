@@ -39,6 +39,8 @@ Partial Class FrmClientScreen
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rtxtTwitter = New System.Windows.Forms.RichTextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -58,10 +60,12 @@ Partial Class FrmClientScreen
         Me.UpdateTimer = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PbrTotal
@@ -81,6 +85,7 @@ Partial Class FrmClientScreen
         'lblTotalProgress
         '
         Me.lblTotalProgress.AutoSize = True
+        Me.lblTotalProgress.ForeColor = System.Drawing.Color.Black
         Me.lblTotalProgress.Location = New System.Drawing.Point(279, 51)
         Me.lblTotalProgress.Name = "lblTotalProgress"
         Me.lblTotalProgress.Size = New System.Drawing.Size(21, 13)
@@ -90,6 +95,7 @@ Partial Class FrmClientScreen
         'lblProgress
         '
         Me.lblProgress.AutoSize = True
+        Me.lblProgress.ForeColor = System.Drawing.Color.Black
         Me.lblProgress.Location = New System.Drawing.Point(279, 22)
         Me.lblProgress.Name = "lblProgress"
         Me.lblProgress.Size = New System.Drawing.Size(21, 13)
@@ -98,6 +104,7 @@ Partial Class FrmClientScreen
         '
         'GroupBox2
         '
+        Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
         Me.GroupBox2.Controls.Add(Me.txtUsername)
         Me.GroupBox2.Controls.Add(Me.btnEdit)
         Me.GroupBox2.Controls.Add(Me.chkRememberMe)
@@ -105,6 +112,8 @@ Partial Class FrmClientScreen
         Me.GroupBox2.Controls.Add(Me.txtPassword)
         Me.GroupBox2.Controls.Add(Me.BtnOptions)
         Me.GroupBox2.Controls.Add(Me.btnLogin)
+        Me.GroupBox2.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.GroupBox2.ForeColor = System.Drawing.Color.Black
         Me.GroupBox2.Location = New System.Drawing.Point(337, 181)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(284, 121)
@@ -114,6 +123,8 @@ Partial Class FrmClientScreen
         '
         'txtUsername
         '
+        Me.txtUsername.BackColor = System.Drawing.Color.White
+        Me.txtUsername.ForeColor = System.Drawing.Color.Black
         Me.txtUsername.Location = New System.Drawing.Point(6, 48)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(181, 20)
@@ -122,6 +133,7 @@ Partial Class FrmClientScreen
         'btnEdit
         '
         Me.btnEdit.Enabled = False
+        Me.btnEdit.ForeColor = System.Drawing.Color.Black
         Me.btnEdit.Location = New System.Drawing.Point(193, 17)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(75, 23)
@@ -132,6 +144,7 @@ Partial Class FrmClientScreen
         'chkRememberMe
         '
         Me.chkRememberMe.AutoSize = True
+        Me.chkRememberMe.ForeColor = System.Drawing.Color.Black
         Me.chkRememberMe.Location = New System.Drawing.Point(6, 101)
         Me.chkRememberMe.Name = "chkRememberMe"
         Me.chkRememberMe.Size = New System.Drawing.Size(95, 17)
@@ -142,6 +155,7 @@ Partial Class FrmClientScreen
         'CboMinecraftVersion
         '
         Me.CboMinecraftVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboMinecraftVersion.ForeColor = System.Drawing.Color.Black
         Me.CboMinecraftVersion.FormattingEnabled = True
         Me.CboMinecraftVersion.Location = New System.Drawing.Point(6, 19)
         Me.CboMinecraftVersion.MaxDropDownItems = 10
@@ -151,6 +165,8 @@ Partial Class FrmClientScreen
         '
         'txtPassword
         '
+        Me.txtPassword.BackColor = System.Drawing.Color.White
+        Me.txtPassword.ForeColor = System.Drawing.Color.Black
         Me.txtPassword.Location = New System.Drawing.Point(6, 75)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(181, 20)
@@ -159,6 +175,7 @@ Partial Class FrmClientScreen
         '
         'BtnOptions
         '
+        Me.BtnOptions.ForeColor = System.Drawing.Color.Black
         Me.BtnOptions.Location = New System.Drawing.Point(193, 46)
         Me.BtnOptions.Name = "BtnOptions"
         Me.BtnOptions.Size = New System.Drawing.Size(75, 23)
@@ -168,6 +185,7 @@ Partial Class FrmClientScreen
         '
         'btnLogin
         '
+        Me.btnLogin.ForeColor = System.Drawing.Color.Black
         Me.btnLogin.Location = New System.Drawing.Point(193, 75)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
@@ -178,9 +196,10 @@ Partial Class FrmClientScreen
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.rtxtTwitter)
-        Me.GroupBox1.Location = New System.Drawing.Point(5, 12)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox1.Location = New System.Drawing.Point(11, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(326, 163)
+        Me.GroupBox1.Size = New System.Drawing.Size(320, 163)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Twitter"
@@ -188,15 +207,18 @@ Partial Class FrmClientScreen
         'rtxtTwitter
         '
         Me.rtxtTwitter.BackColor = System.Drawing.Color.White
+        Me.rtxtTwitter.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rtxtTwitter.Location = New System.Drawing.Point(7, 15)
         Me.rtxtTwitter.Name = "rtxtTwitter"
         Me.rtxtTwitter.ReadOnly = True
-        Me.rtxtTwitter.Size = New System.Drawing.Size(313, 142)
+        Me.rtxtTwitter.Size = New System.Drawing.Size(307, 142)
         Me.rtxtTwitter.TabIndex = 0
         Me.rtxtTwitter.Text = ""
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.LinkLabel2)
+        Me.GroupBox3.Controls.Add(Me.LinkLabel1)
         Me.GroupBox3.Controls.Add(Me.btnRefresh)
         Me.GroupBox3.Controls.Add(Me.Label7)
         Me.GroupBox3.Controls.Add(Me.Label6)
@@ -210,6 +232,7 @@ Partial Class FrmClientScreen
         Me.GroupBox3.Controls.Add(Me.lblER)
         Me.GroupBox3.Controls.Add(Me.lblMining)
         Me.GroupBox3.Controls.Add(Me.lblIR)
+        Me.GroupBox3.ForeColor = System.Drawing.Color.Black
         Me.GroupBox3.Location = New System.Drawing.Point(337, 12)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(284, 163)
@@ -217,8 +240,29 @@ Partial Class FrmClientScreen
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Server Statuses"
         '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(190, 67)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(50, 13)
+        Me.LinkLabel2.TabIndex = 16
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "KBG Site"
+        '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(190, 45)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(64, 13)
+        Me.LinkLabel1.TabIndex = 15
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "KBG Twitter"
+        '
         'btnRefresh
         '
+        Me.btnRefresh.ForeColor = System.Drawing.Color.Black
         Me.btnRefresh.Location = New System.Drawing.Point(193, 19)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
@@ -249,6 +293,7 @@ Partial Class FrmClientScreen
         'lblMinecraftLoginServers
         '
         Me.lblMinecraftLoginServers.AutoSize = True
+        Me.lblMinecraftLoginServers.ForeColor = System.Drawing.Color.Black
         Me.lblMinecraftLoginServers.Location = New System.Drawing.Point(9, 134)
         Me.lblMinecraftLoginServers.Name = "lblMinecraftLoginServers"
         Me.lblMinecraftLoginServers.Size = New System.Drawing.Size(122, 13)
@@ -258,6 +303,7 @@ Partial Class FrmClientScreen
         'lblMinecraftdotnet
         '
         Me.lblMinecraftdotnet.AutoSize = True
+        Me.lblMinecraftdotnet.ForeColor = System.Drawing.Color.Black
         Me.lblMinecraftdotnet.Location = New System.Drawing.Point(59, 111)
         Me.lblMinecraftdotnet.Name = "lblMinecraftdotnet"
         Me.lblMinecraftdotnet.Size = New System.Drawing.Size(72, 13)
@@ -307,6 +353,7 @@ Partial Class FrmClientScreen
         'lblTFCR
         '
         Me.lblTFCR.AutoSize = True
+        Me.lblTFCR.ForeColor = System.Drawing.Color.Black
         Me.lblTFCR.Location = New System.Drawing.Point(37, 89)
         Me.lblTFCR.Name = "lblTFCR"
         Me.lblTFCR.Size = New System.Drawing.Size(93, 13)
@@ -316,6 +363,7 @@ Partial Class FrmClientScreen
         'lblER
         '
         Me.lblER.AutoSize = True
+        Me.lblER.ForeColor = System.Drawing.Color.Black
         Me.lblER.Location = New System.Drawing.Point(55, 67)
         Me.lblER.Name = "lblER"
         Me.lblER.Size = New System.Drawing.Size(76, 13)
@@ -325,6 +373,7 @@ Partial Class FrmClientScreen
         'lblMining
         '
         Me.lblMining.AutoSize = True
+        Me.lblMining.ForeColor = System.Drawing.Color.Black
         Me.lblMining.Location = New System.Drawing.Point(59, 45)
         Me.lblMining.Name = "lblMining"
         Me.lblMining.Size = New System.Drawing.Size(72, 13)
@@ -334,6 +383,7 @@ Partial Class FrmClientScreen
         'lblIR
         '
         Me.lblIR.AutoSize = True
+        Me.lblIR.ForeColor = System.Drawing.Color.Black
         Me.lblIR.Location = New System.Drawing.Point(50, 22)
         Me.lblIR.Name = "lblIR"
         Me.lblIR.Size = New System.Drawing.Size(81, 13)
@@ -343,6 +393,7 @@ Partial Class FrmClientScreen
         'lblProgressInfo
         '
         Me.lblProgressInfo.AutoSize = True
+        Me.lblProgressInfo.ForeColor = System.Drawing.Color.Black
         Me.lblProgressInfo.Location = New System.Drawing.Point(6, 83)
         Me.lblProgressInfo.Name = "lblProgressInfo"
         Me.lblProgressInfo.Size = New System.Drawing.Size(138, 13)
@@ -356,9 +407,10 @@ Partial Class FrmClientScreen
         Me.GroupBox4.Controls.Add(Me.PbrTotal)
         Me.GroupBox4.Controls.Add(Me.lblTotalProgress)
         Me.GroupBox4.Controls.Add(Me.lblProgress)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 181)
+        Me.GroupBox4.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox4.Location = New System.Drawing.Point(11, 181)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(319, 116)
+        Me.GroupBox4.Size = New System.Drawing.Size(320, 121)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Progress"
@@ -380,12 +432,24 @@ Partial Class FrmClientScreen
         '
         Me.NotifyIcon1.Text = "NotifyIcon1"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(11, 313)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(614, 134)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 18
+        Me.PictureBox1.TabStop = False
+        '
         'FrmClientScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(633, 309)
+        Me.ClientSize = New System.Drawing.Size(631, 459)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
@@ -405,7 +469,9 @@ Partial Class FrmClientScreen
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PbrTotal As System.Windows.Forms.ProgressBar
@@ -442,5 +508,8 @@ Partial Class FrmClientScreen
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
 
 End Class

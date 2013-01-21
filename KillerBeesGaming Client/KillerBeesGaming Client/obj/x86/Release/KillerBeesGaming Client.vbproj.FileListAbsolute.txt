@@ -26,3 +26,4 @@ C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Cl
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\KillerBeesGaming_Client.Resources.resources
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Jonathan\Desktop\minecraft stuff\KBGMinecraftClient\KillerBeesGaming Client\KillerBeesGaming Client\bin\Release\Ionic.Zip.dll
